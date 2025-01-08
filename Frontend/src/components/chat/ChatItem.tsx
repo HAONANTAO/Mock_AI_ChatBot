@@ -1,7 +1,7 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 import { useAuth } from "../../context/AuthContext";
-
+// import {} from "react";
 // 定义 ChatItemProps 类型
 type ChatItemProps = {
   content: string;

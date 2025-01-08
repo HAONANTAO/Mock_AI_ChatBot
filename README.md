@@ -68,6 +68,14 @@ CloseAI国内https://platform.closeai-asia.com/developer/api/
 
 
 
+如何在国内使用NextChat验证OPENAI API Key是否可用
+
+https://app.nextchat.dev/#/
+
+在nextchat输入自己在openai官网获取的api-key,即可在国内验证实用性
+
+
+
 如何进行国内国外OPENAI的链接
 
 [详细文档](OPENAI.md)
