@@ -1,15 +1,43 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 import { useAuth } from "../../context/AuthContext";
-// import {} from "react";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// color
+import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 // 定义 ChatItemProps 类型
 type ChatItemProps = {
   content: string;
   role: "user" | "assistant";
 };
+// 从给出来的字符串中间拿到code代码部分
+function extractCodeFromString(message: string) {
+  if (message.includes("```")) {
+    const blocks = message.split("```");
+    return blocks;
+  }
+}
+// 检查有没有特殊符号
+function isCodeBlock(str: string) {
+  if (
+    str.includes("=") ||
+    str.includes(";") ||
+    str.includes("[") ||
+    str.includes("]") ||
+    str.includes("{") ||
+    str.includes("}") ||
+    str.includes("#") ||
+    str.includes("//")
+  ) {
+    return true;
+  }
+  return false;
+}
 
+//
 const ChatItem = ({ content, role }: ChatItemProps) => {
   const auth = useAuth();
+  // 可能有也可能没有
+  const messageBlocks = extractCodeFromString(content);
   return role === "assistant" ? (
     <>
       {/* 电脑的回复part */}
@@ -27,7 +55,19 @@ const ChatItem = ({ content, role }: ChatItemProps) => {
 
         {/* messages reply */}
         <Box>
-          <Typography fontSize="20px">{content}</Typography>
+          {/* 看有没有代码显示区别 */}
+          {!messageBlocks && <Typography fontSize="20px">{content}</Typography>}
+          {messageBlocks &&
+            messageBlocks.length > 0 &&
+            messageBlocks.map((block) => {
+              return isCodeBlock(block) ? (
+                <SyntaxHighlighter language="javascript" style={coldarkCold}>
+                  {block}
+                </SyntaxHighlighter>
+              ) : (
+                <Typography fontSize="20px">{block}</Typography>
+              );
+            })}
         </Box>
       </Box>
     </>
