@@ -36,6 +36,36 @@ context api
 
 a modern ai project which will use OpenaAI API to create an AI real-time chatbot similar to ChatGPT. The application stores User's Chats In a Database to keep track of conversations,but a user can delete them anytime. Then UI is capable of showing code blocks if requested by the user
 
+三个阶段 milestones(stage)
+
+第一个 stage1 顺利运行openai api下的chatbot
+
+第二个stage2 顺利完成基础项目的配置
+
+第三个 stage3 自己进行额外的改进
+
+
+
+有帮助的文档视频代码等link
+
+核心chatbothttps://github.com/Nikhilthadani/MERN-AI-ChatBot
+
+核心视频https://www.youtube.com/watch?v=wrHTcjSZQ1Y&t=60s
+
+
+
+简易chatbothttps://github.com/bradtraversy/chatgpt-chatbot
+
+配套视频https://www.youtube.com/watch?v=1YU83Lw58eo&list=PLC20u92Q90A5DbsbyBoaWnj-6nzYMnyx8&index=16
+
+
+
+OpenAI官网https://platform.openai.com/apps
+
+CloseAI国内https://platform.closeai-asia.com/developer/api/
+
+国内访问API视频https://www.youtube.com/watch?v=IzBGRH-6p7U&list=PLC20u92Q90A5DbsbyBoaWnj-6nzYMnyx8&index=17
+
 
 
 如何进行国内国外OPENAI的链接
