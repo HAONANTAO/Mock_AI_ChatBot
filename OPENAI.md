@@ -170,3 +170,27 @@ const config = configOpenAI();
 ### Display Result:
 
 <a href="https://petknowledge.com">     <img src="./Result.png" alt="Result">
+
+
+
+### Errors Might Occured:
+
+The mose error will occured is 500 error which is about the connection:
+
+There are several reasons:
+
+1.The internet issue
+
+try different network, VPN, using the terminal to ping the website,see if there are packets loss.
+
+
+
+2.Token
+
+check the account, see if there are available to use and enought money/tokens.
+
+
+
+3.API key
+
+check the api-key and baseURL,check whether can get the variable properly from .env file.
