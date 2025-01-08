@@ -4,7 +4,6 @@ import { USERNOT } from "../utils/constants.js";
 import { configOpenAI } from "../config/openai-config.js";
 import { OpenAIApi, ChatCompletionRequestMessage } from "openai";
 
-import { imagesGenerate, chatCompletions } from "china-openai";
 export const generateChatCompletion = async (
   req: Request,
   res: Response,
