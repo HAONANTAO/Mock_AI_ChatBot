@@ -35,3 +35,9 @@ context api
 ## **项目介绍**
 
 a modern ai project which will use OpenaAI API to create an AI real-time chatbot similar to ChatGPT. The application stores User's Chats In a Database to keep track of conversations,but a user can delete them anytime. Then UI is capable of showing code blocks if requested by the user
+
+
+
+如何进行国内国外OPENAI的链接
+
+[详细文档](OPENAI.md)
