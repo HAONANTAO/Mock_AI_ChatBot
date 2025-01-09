@@ -4,6 +4,8 @@ import { useAuth } from "../../context/AuthContext";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // color
 import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import * as langdetect from "langdetect";
+
 // 定义 ChatItemProps 类型
 type ChatItemProps = {
   content: string;
@@ -13,24 +15,22 @@ type ChatItemProps = {
 function extractCodeFromString(message: string) {
   if (message.includes("```")) {
     const blocks = message.split("```");
-    return blocks;
+    return blocks.filter((block) => block.trim() !== "");
   }
+  return [];
 }
-// 检查有没有特殊符号
-function isCodeBlock(str: string) {
-  if (
-    str.includes("=") ||
-    str.includes(";") ||
-    str.includes("[") ||
-    str.includes("]") ||
-    str.includes("{") ||
-    str.includes("}") ||
-    str.includes("#") ||
-    str.includes("//")
-  ) {
-    return true;
+
+// detect the code languages part
+function detectLanguage(block: string): string {
+  try {
+    const result = langdetect.detect(block);
+    if (result.length > 0) {
+      return result[0].lang;
+    }
+    return "text";
+  } catch (error) {
+    return "text";
   }
-  return false;
 }
 
 //
@@ -60,12 +60,13 @@ const ChatItem = ({ content, role }: ChatItemProps) => {
           {messageBlocks &&
             messageBlocks.length > 0 &&
             messageBlocks.map((block) => {
-              return isCodeBlock(block) ? (
-                <SyntaxHighlighter language="javascript" style={coldarkDark}>
-                  {block} 
-                </SyntaxHighlighter>
-              ) : (
+              const lang = detectLanguage(block);
+              return lang === "text" ? (
                 <Typography fontSize="20px">{block}</Typography>
+              ) : (
+                <SyntaxHighlighter language={lang} style={coldarkDark}>
+                  {block}
+                </SyntaxHighlighter>
               );
             })}
         </Box>
