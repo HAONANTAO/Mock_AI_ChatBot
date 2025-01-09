@@ -3,7 +3,7 @@ import React from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // color
-import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 // 定义 ChatItemProps 类型
 type ChatItemProps = {
   content: string;
@@ -61,8 +61,8 @@ const ChatItem = ({ content, role }: ChatItemProps) => {
             messageBlocks.length > 0 &&
             messageBlocks.map((block) => {
               return isCodeBlock(block) ? (
-                <SyntaxHighlighter language="javascript" style={coldarkCold}>
-                  {block}
+                <SyntaxHighlighter language="javascript" style={coldarkDark}>
+                  {block} 
                 </SyntaxHighlighter>
               ) : (
                 <Typography fontSize="20px">{block}</Typography>
