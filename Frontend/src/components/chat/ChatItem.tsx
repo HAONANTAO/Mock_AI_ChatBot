@@ -4,8 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // color
 import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import franc from "franc";
-
+import { franc } from "franc";
 // 定义 ChatItemProps 类型
 type ChatItemProps = {
   content: string;
@@ -13,16 +12,20 @@ type ChatItemProps = {
 };
 // 从给出来的字符串中间拿到code代码部分
 function extractCodeFromString(message: string) {
-  if (message.includes("```")) {
-    const blocks = message.split("```");
-    return blocks.filter((block) => block.trim() !== "");
+  const codeBlocks = [];
+  const regex = /```([\s\S]*?)```/g;
+  let match;
+  while ((match = regex.exec(message)) !== null) {
+    codeBlocks.push(match[1]);
   }
-  return [];
+  return codeBlocks;
 }
 
 // detect the code languages part
 function detectLanguage(block: string): string {
-  const lang = franc(block);
+  const cleanBlock = block.replace(/[^a-zA-Z0-9]/g, " ").trim();
+  const lang = franc(cleanBlock);
+  console.log(lang);
   return lang || "text";
 }
 
@@ -52,12 +55,15 @@ const ChatItem = ({ content, role }: ChatItemProps) => {
           {!messageBlocks && <Typography fontSize="20px">{content}</Typography>}
           {messageBlocks &&
             messageBlocks.length > 0 &&
-            messageBlocks.map((block) => {
+            messageBlocks.map((block, index) => {
               const lang = detectLanguage(block);
               return lang === "text" ? (
                 <Typography fontSize="20px">{block}</Typography>
               ) : (
-                <SyntaxHighlighter language={lang} style={coldarkDark}>
+                <SyntaxHighlighter
+                  language={lang}
+                  style={coldarkDark}
+                  key={index}>
                   {block}
                 </SyntaxHighlighter>
               );
