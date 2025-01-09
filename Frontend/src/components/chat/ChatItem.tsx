@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // color
 import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import langdetect from "langdetect";
+import franc from "franc";
 
 // 定义 ChatItemProps 类型
 type ChatItemProps = {
@@ -22,13 +22,8 @@ function extractCodeFromString(message: string) {
 
 // detect the code languages part
 function detectLanguage(block: string): string {
-  try {
-    const result = langdetect.detect(block);
-    console.log(result[0].lang);
-    return result[0].lang;
-  } catch (error) {
-    return "text";
-  }
+  const lang = franc(block);
+  return lang || "text";
 }
 
 //
