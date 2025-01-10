@@ -52,13 +52,15 @@ const ChatItem = ({
         {!messageBlocks && (
           <Typography sx={{ fontSize: "20px" }}>{content}</Typography>
         )}
+        {/* 渲染 */}
         {messageBlocks &&
           messageBlocks.length &&
           messageBlocks.map((block) =>
+            
             isCodeBlock(block) ? (
-              <SyntaxHighlighter style={coldarkDark} language="javascript">
-                {block}
-              </SyntaxHighlighter>
+              // language="javascript"
+            
+              <SyntaxHighlighter style={coldarkDark}>{block}</SyntaxHighlighter>
             ) : (
               <Typography sx={{ fontSize: "20px" }}>{block}</Typography>
             ),
