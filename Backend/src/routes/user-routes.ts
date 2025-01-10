@@ -18,5 +18,5 @@ userRoutes.post("/signup", validate(signupValidator), userSignup);
 userRoutes.post("/login", validate(loginValidator), userLogin);
 
 userRoutes.get("/auth-status", verifyToken, verifyUser);
-userRoutes.get("/logout", logoutUser);
+userRoutes.get("/logout", verifyToken, logoutUser);
 export default userRoutes;

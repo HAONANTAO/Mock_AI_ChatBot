@@ -194,7 +194,6 @@ export const logoutUser = async (
       httpOnly: true,
       domain: "localhost", //
       path: "/",
-
       signed: true,
     });
     return res
