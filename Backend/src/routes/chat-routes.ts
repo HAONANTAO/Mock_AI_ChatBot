@@ -1,7 +1,10 @@
 import { Router } from "express";
 import { verifyToken } from "../utils/token-manager.js";
 import { chatCompletionValidator, validate } from "../utils/validator.js";
-import { generateChatCompletion } from "../controllers/chat-controller.js";
+import {
+  generateChatCompletion,
+  sendChatsToUser,
+} from "../controllers/chat-controller.js";
 
 // protected API ,only user can be visited!
 const chatRoutes = Router();
@@ -15,7 +18,6 @@ chatRoutes.post(
   generateChatCompletion,
 );
 
-// chatRoutes.post("/test", (req, res) => {
-//   console.log("在运行2");
-// });
+// 初始化聊天信息
+chatRoutes.get("/all-chats", verifyToken, sendChatsToUser);
 export default chatRoutes;

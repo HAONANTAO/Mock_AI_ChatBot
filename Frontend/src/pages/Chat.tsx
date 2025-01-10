@@ -1,36 +1,11 @@
 import { Avatar, Box, Button, IconButton, Typography } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { red } from "@mui/material/colors";
 import ChatItem from "../components/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
-import { sendChatRequest } from "../helpers/api-communicator";
-// test
-// const chatMessages = [
-//   { role: "user", content: "Hi, can you help me with JavaScript?" },
-//   {
-//     role: "assistant",
-//     content: "Of course! What do you need help with in JavaScript?",
-//   },
-//   { role: "user", content: "I want to understand how to use async/await." },
-//   {
-//     role: "assistant",
-//     content:
-//       "Async/await allows you to work with asynchronous code in a more readable way. Would you like an example?",
-//   },
-//   { role: "user", content: "Yes, please!" },
-//   {
-//     role: "assistant",
-//     content:
-//       "Here's an example:\n\n```javascript\nasync function fetchData() {\n  try {\n    const response = await fetch('https://api.example.com/data');\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error('Error fetching data:', error);\n  }\n}\nfetchData();\n```",
-//   },
-//   { role: "user", content: "Yes, please!" },
-//   {
-//     role: "assistant",
-//     content:
-//       "Here's an example:\n\n```javascript\nasync function fetchData() {\n  try {\n    const response = await fetch('https://api.example.com/data');\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error('Error fetching data:', error);\n  }\n}\nfetchData();\n```",
-//   },
-// ];
+import { getUserChats, sendChatRequest } from "../helpers/api-communicator";
+import toast from "react-hot-toast";
 
 type Message = {
   role: "user" | "assistant";
@@ -67,7 +42,21 @@ const Chat = () => {
       handlerSubmit();
     }
   };
-
+  // 浏览器绘制前同步执行
+  useLayoutEffect(() => {
+    if (auth?.isLoggedIn && auth.user) {
+      toast.loading("Loading the Chats", { id: "loadchats" });
+      getUserChats()
+        .then((data) => {
+          setChatMessages([...data.chats]);
+          toast.success("Successfully load the Chats", { id: "loadchats" });
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Loading Chats failed! ", { id: "loadchats" });
+        });
+    }
+  }, []);
   return (
     <>
       <Box

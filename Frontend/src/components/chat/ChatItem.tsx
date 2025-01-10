@@ -91,15 +91,25 @@ const ChatItem = ({
         {!messageBlocks && (
           <Typography sx={{ fontSize: "20px" }}>{content}</Typography>
         )}
+        {/* 渲染 */}
         {messageBlocks &&
-          messageBlocks.length &&
-          messageBlocks.map((block) =>
-            isCodeBlock(block) ? (
-              <SyntaxHighlighter style={coldarkDark}>{block}</SyntaxHighlighter>
+          messageBlocks.length > 0 &&
+          messageBlocks.map((block, index) => {
+            const [isCode, lang] = isCodeBlock(block);
+
+            return isCode ? (
+              <SyntaxHighlighter
+                style={coldarkDark}
+                language={lang}
+                key={index}>
+                {block}
+              </SyntaxHighlighter>
             ) : (
-              <Typography sx={{ fontSize: "20px" }}>{block}</Typography>
-            ),
-          )}
+              <Typography key={index} sx={{ fontSize: "20px" }}>
+                {block}
+              </Typography>
+            );
+          })}
       </Box>
     </Box>
   );
