@@ -10,6 +10,7 @@ import {
   checkAuthStatus,
   loginUser,
   logoutUser,
+  signupUser,
 } from "../helpers/api-communicator";
 
 // 其他导入保持不变
@@ -49,7 +50,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setIsLoggedIn(true);
     }
   };
-  const signup = async (name: string, email: string, password: string) => {};
+  const signup = async (name: string, email: string, password: string) => {
+    const data = await signupUser(name, email, password);
+    if (data) {
+      // signup完直接就登录了！！
+      setUser({ email: data.email, name: data.name });
+      setIsLoggedIn(true);
+    }
+  };
   const logout = async () => {
     await logoutUser();
     // 重置

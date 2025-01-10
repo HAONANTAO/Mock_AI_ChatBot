@@ -19,6 +19,29 @@ export const loginUser = async (email: string, password: string) => {
   return data;
 };
 
+// 注册signup
+export const signupUser = async (
+  name: string,
+  email: string,
+  password: string,
+) => {
+  const res = await axios.post(
+    "/user/signup",
+    { name, email, password },
+    {
+      withCredentials: true,
+    },
+  );
+
+  if (res.status !== 201) {
+    // if not ok
+    throw new Error("Unable to signup");
+  }
+  // ok
+  const data = await res.data;
+  return data;
+};
+
 //checkAuthStatus
 export const checkAuthStatus = async () => {
   const res = await axios.get("/user/auth-status");

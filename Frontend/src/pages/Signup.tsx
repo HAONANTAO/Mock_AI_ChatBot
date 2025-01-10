@@ -12,16 +12,17 @@ const Signup = () => {
     e.preventDefault();
     // 把表单内的数据装进 FormData 对象，准备传输
     const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
     try {
-      toast.loading("Signing in ~", { id: "login" });
-      await auth?.login(email, password);
-      toast.success("Signed in Successfully!", { id: "login" });
+      toast.loading("Signing in ~", { id: "signup" });
+      await auth?.signup(name, email, password);
+      toast.success("Signed in Successfully!", { id: "signup" });
     } catch (error) {
       console.log(error);
-      toast.error("Signed in Failed!", { id: "login" });
+      toast.error("Signed in Failed!", { id: "signup" });
     }
   };
   useEffect(() => {
@@ -42,7 +43,7 @@ const Signup = () => {
           <img src="airobot.png" alt="Robot" style={{ width: "400px" }} />
         </Box>
 
-        {/*  login part*/}
+        {/*  signup part*/}
         <Box
           display={"flex"}
           flex={{ xs: 1, md: 0.5 }}
@@ -75,7 +76,7 @@ const Signup = () => {
                 textAlign={"center"}
                 padding="2"
                 fontWeight={"800"}>
-                Login
+                Sign-Up
               </Typography>
               <CustomisedInput type="text" name="name" label="Name" />
               <CustomisedInput type="email" name="email" label="Email" />
@@ -102,7 +103,7 @@ const Signup = () => {
                   },
                 }}
                 endIcon={<BiLogInCircle />}>
-                Login
+                Sign-Up
               </Button>
             </Box>
           </form>
