@@ -11,20 +11,20 @@ function extractCodeFromString(message: string) {
   }
 }
 
-function isCodeBlock(str: string) {
-  if (
-    str.includes("=") ||
-    str.includes(";") ||
-    str.includes("[") ||
-    str.includes("]") ||
-    str.includes("{") ||
-    str.includes("}") ||
-    str.includes("#") ||
-    str.includes("//")
-  ) {
-    return true;
+function isCodeBlock(str: string): [boolean, string] {
+  const trimmed = str.trim();
+  if (trimmed.startsWith("```")) {
+    const lang = trimmed.split("\n")[0].replace("```", "").trim();
+    if (lang) {
+      return [true, lang];
+    }
   }
-  return false;
+  const codeChars = ["=", ";", "[", "]", "{", "}", "#", "//"];
+  if (codeChars.some((char) => str.includes(char))) {
+    const firstWord = str.trim().split(" ")[0];
+    return [true, firstWord];
+  }
+  return [false, ""];
 }
 const ChatItem = ({
   content,
@@ -54,17 +54,23 @@ const ChatItem = ({
         )}
         {/* 渲染 */}
         {messageBlocks &&
-          messageBlocks.length &&
-          messageBlocks.map((block) =>
-            
-            isCodeBlock(block) ? (
-              // language="javascript"
-            
-              <SyntaxHighlighter style={coldarkDark}>{block}</SyntaxHighlighter>
+          messageBlocks.length > 0 &&
+          messageBlocks.map((block, index) => {
+            const [isCode, lang] = isCodeBlock(block);
+            console.log(lang);
+            return isCode ? (
+              <SyntaxHighlighter
+                style={coldarkDark}
+                language={lang}
+                key={index}>
+                {block}
+              </SyntaxHighlighter>
             ) : (
-              <Typography sx={{ fontSize: "20px" }}>{block}</Typography>
-            ),
-          )}
+              <Typography key={index} sx={{ fontSize: "20px" }}>
+                {block}
+              </Typography>
+            );
+          })}
       </Box>
     </Box>
   ) : (
