@@ -1,5 +1,6 @@
 import { Avatar, Box, Button, IconButton, Typography } from "@mui/material";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { red } from "@mui/material/colors";
 import ChatItem from "../components/chat/ChatItem";
@@ -16,6 +17,7 @@ type Message = {
   content: string;
 };
 const Chat = () => {
+  const navigate = useNavigate();
   const auth = useAuth();
   // 定位输入框数据
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -59,6 +61,12 @@ const Chat = () => {
           console.log(error);
           toast.error("Loading Chats failed! ", { id: "loadchats" });
         });
+    }
+  }, [auth]);
+  useEffect(() => {
+    if (!auth?.user) {
+      navigate("/login");
+      return;
     }
   }, [auth]);
   const handleDeleteChats = async () => {

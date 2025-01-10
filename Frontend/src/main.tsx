@@ -25,7 +25,7 @@ createRoot(document.getElementById("root")!).render(
     <AuthProvider>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <Toaster position="top-right" />
+          <Toaster position="top-center" />
           <App />
         </ThemeProvider>
       </BrowserRouter>
