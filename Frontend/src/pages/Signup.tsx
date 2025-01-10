@@ -17,12 +17,12 @@ const Signup = () => {
     const password = formData.get("password") as string;
 
     try {
-      toast.loading("Signing in ~", { id: "signup" });
+      toast.loading("Signing up ~", { id: "signup" });
       await auth?.signup(name, email, password);
-      toast.success("Signed in Successfully!", { id: "signup" });
+      toast.success("Signed up Successfully!", { id: "signup" });
     } catch (error) {
       console.log(error);
-      toast.error("Signed in Failed!", { id: "signup" });
+      toast.error("Signed up Failed!", { id: "signup" });
     }
   };
   useEffect(() => {
