@@ -171,3 +171,37 @@ export const verifyUser = async (
     return res.status(200).json({ message: "ERROR", cause: error.message });
   }
 };
+
+export const logoutUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    //user token check
+    // 用token里面的数据找user
+    const user = await User.findById(res.locals.jwtData.id);
+    if (!user) {
+      return res.status(401).send(`${USERNOT}`);
+    }
+
+    if (user._id.toString() !== res.locals.jwtData.id) {
+      return res.status(401).send("Permissions didn't match");
+    }
+
+    // 首先清除之前的token cookies
+    res.clearCookie(COOKIE_NAME, {
+      httpOnly: true,
+      domain: "localhost", //
+      path: "/",
+
+      signed: true,
+    });
+    return res
+      .status(200)
+      .json({ message: "OK", name: user.name, email: user.email });
+  } catch (error) {
+    console.log(error);
+    return res.status(200).json({ message: "ERROR", cause: error.message });
+  }
+};

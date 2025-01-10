@@ -6,7 +6,11 @@ import {
   useEffect,
   useState,
 } from "react";
-import { checkAuthStatus, loginUser } from "../helpers/api-communicator";
+import {
+  checkAuthStatus,
+  loginUser,
+  logoutUser,
+} from "../helpers/api-communicator";
 
 // 其他导入保持不变
 type User = {
@@ -46,7 +50,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
   const signup = async (name: string, email: string, password: string) => {};
-  const logout = async () => {};
+  const logout = async () => {
+    await logoutUser();
+    // 重置
+    setIsLoggedIn(false);
+    setUser(null);
+    // 刷新
+    window.location.reload();
+  };
 
   const value = {
     user,
