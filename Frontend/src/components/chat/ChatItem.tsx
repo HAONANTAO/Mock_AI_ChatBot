@@ -14,6 +14,7 @@ function extractCodeFromString(message: string) {
 function isCodeBlock(str: string): [boolean, string] {
   const trimmed = str.trim();
   if (trimmed.startsWith("```")) {
+    // 去掉```代替为空格
     const lang = trimmed.split("\n")[0].replace("```", "").trim();
     if (lang) {
       return [true, lang];
@@ -24,7 +25,7 @@ function isCodeBlock(str: string): [boolean, string] {
     const firstWord = str.trim().split(" ")[0];
     return [true, firstWord];
   }
-  return [false, ""];
+  return [false, "text"];
 }
 const ChatItem = ({
   content,
@@ -57,7 +58,7 @@ const ChatItem = ({
           messageBlocks.length > 0 &&
           messageBlocks.map((block, index) => {
             const [isCode, lang] = isCodeBlock(block);
-            console.log(lang);
+
             return isCode ? (
               <SyntaxHighlighter
                 style={coldarkDark}
