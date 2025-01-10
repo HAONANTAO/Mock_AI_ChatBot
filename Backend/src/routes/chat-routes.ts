@@ -2,6 +2,7 @@ import { Router } from "express";
 import { verifyToken } from "../utils/token-manager.js";
 import { chatCompletionValidator, validate } from "../utils/validator.js";
 import {
+  deleteChats,
   generateChatCompletion,
   sendChatsToUser,
 } from "../controllers/chat-controller.js";
@@ -20,4 +21,8 @@ chatRoutes.post(
 
 // 初始化聊天信息
 chatRoutes.get("/all-chats", verifyToken, sendChatsToUser);
+
+// 删除聊天信息
+chatRoutes.delete("/delete", verifyToken, deleteChats);
+
 export default chatRoutes;

@@ -4,7 +4,11 @@ import { useAuth } from "../context/AuthContext";
 import { red } from "@mui/material/colors";
 import ChatItem from "../components/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
-import { getUserChats, sendChatRequest } from "../helpers/api-communicator";
+import {
+  deleteUserChats,
+  getUserChats,
+  sendChatRequest,
+} from "../helpers/api-communicator";
 import toast from "react-hot-toast";
 
 type Message = {
@@ -56,7 +60,18 @@ const Chat = () => {
           toast.error("Loading Chats failed! ", { id: "loadchats" });
         });
     }
-  }, []);
+  }, [auth]);
+  const handleDeleteChats = async () => {
+    try {
+      toast.loading("Deleting Chats", { id: "deleteChats" });
+      await deleteUserChats();
+      setChatMessages([]);
+      toast.success("Successfully delete  Chats", { id: "deleteChats" });
+    } catch (error) {
+      console.log(error);
+      toast.error("Deleting Chats failed", { id: "deleteChats" });
+    }
+  };
   return (
     <>
       <Box
@@ -113,6 +128,7 @@ const Chat = () => {
 
             {/* Clear Conversation button */}
             <Button
+              onClick={handleDeleteChats}
               sx={{
                 width: "200px",
                 my: "auto",
