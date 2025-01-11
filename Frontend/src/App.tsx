@@ -6,7 +6,6 @@ import Signup from "./pages/Signup";
 import Chat from "./pages/Chat";
 import NotFound from "./pages/NotFound";
 import { useAuth } from "./context/AuthContext";
-import Footer from "./components/footer/Footer";
 
 function App() {
   const auth = useAuth();
@@ -22,7 +21,6 @@ function App() {
         )}
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
-      <Footer />
     </main>
   );
 }

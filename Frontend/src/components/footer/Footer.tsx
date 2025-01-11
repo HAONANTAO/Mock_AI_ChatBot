@@ -17,8 +17,8 @@ const Footer = () => {
             <Link
               style={{ color: "white" }}
               className="nav-link"
-              to={"https://youtube.com/indiancoders"}>
-              Indian Coders
+              to={"https://github.com/HAONANTAO"}>
+              Aaron TAO
             </Link>
           </span>
           💘
