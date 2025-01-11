@@ -4,7 +4,8 @@ import { Box, useMediaQuery, useTheme } from "@mui/material";
 
 const Home = () => {
   const theme = useTheme();
-  const isBelowMd = useMediaQuery();
+  // 当前视口宽度是否小于 Material-UI 所定义的 “中等（medium）” 屏幕宽度
+  const isBelowMd = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <>
       <Box width={"100%"} height={"100%"} flex={"flex"} mx={"auto"}>
@@ -47,8 +48,9 @@ const Home = () => {
               alt="chatbot"
               style={{
                 display: "flex",
+                width: isBelowMd ? "80%" : "60%",
                 margin: "auto",
-                width: "60%",
+
                 borderRadius: 20,
                 // 105是模糊半径
                 boxShadow: "-5px -5px  105px#64f3d5",
