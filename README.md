@@ -1,10 +1,59 @@
-# **Project Name**
+# **The Chat-Bot**
 
-The
+
+
+# Table Of Content:
+
+-- [**Description**](#**Description**)
+
+-- [**Version**](#**Version**)
+
+-- [**Prerequisites**](#**Prerequisites**)
+
+-- [**Installation Guide**](#**Installation Guide**)
+
+-- [**Quick Start**](#**Version**)
+
+-- [**Features**](#**Features**)
+
+-- [**Core Functionality**](#**Core Functionality**)
+
+-- [**Advanced Features**](#**Advanced Features**)
+
+-- [**Project Architecture**](#**Project Architecture**)
+
+-- [**Tech Stack**](#**Tech Stack**)
+
+-- [**API Documentation**](#**API Documentation**)
+
+-- [**Demo**](#**Demo**)
+
+-- [**Resources**](#**Resources**)
+
+-- [**Roadmap**](#**Roadmap**)
+
+-- [**Contact Information**](#**Contact Information**)
+
+-- [**License**](#**License**)
+
+
+
+
+
+
 
 # **Description**
 
-# **Version**：
+The Mock ChatBot is an intelligent chatbot application leveraging OpenAI's API to mimic the capabilities of GPT 3.5 Turbo. It offers users a personalized chatting experience, complete with user registration (signup), login, and logout functionalities. Whether you're looking for quick answers, detailed explanations, or just some friendly chatter, this custom chatbot has you covered.
+
+# Quick Start**Version**：
+
+**Version 1.0:** Initial release, with basic chat functionality, user authentication flow for signup and login established.
+**Version 1.1:** An upgraded version that introduced further optimizations to the chat experience, potentially enhancing response speed and accuracy.
+
+**Version 1.2:** Make some improvement on the UI design and animation things, make the display more vivid.
+
+**Version 1.3: **more features comming..
 
 # **Prerequisites**：
 
@@ -26,13 +75,15 @@ The
 
 # **Demo**：
 
-# **Screenshots**：
-
 # **Resources**：
 
 # **Roadmap**：
 
 # **Contact Information**：
+
+
+
+# **License**：
 
 # 聊天机器人 MERN chatgpt 模拟器
 
