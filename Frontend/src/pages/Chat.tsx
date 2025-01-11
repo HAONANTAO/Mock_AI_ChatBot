@@ -205,7 +205,7 @@ const Chat = () => {
           <div
             style={{
               width: "100%",
-              padding: "20px",
+
               borderRadius: 8,
               backgroundColor: "rgb(17,27,39)",
               display: "flex",
@@ -218,7 +218,7 @@ const Chat = () => {
               style={{
                 width: "100%",
                 backgroundColor: "transparent",
-                padding: "10px",
+                padding: "30px",
 
                 border: "none",
                 outline: "none",
@@ -228,7 +228,7 @@ const Chat = () => {
             />
             {/* 专门设计用于容纳图标并执行相关交互操作， */}
             <IconButton
-              sx={{ ml: "auto", color: "white" }}
+              sx={{ ml: "auto", color: "white", mx: 1 }}
               onClick={handlerSubmit}>
               <IoMdSend />
             </IconButton>

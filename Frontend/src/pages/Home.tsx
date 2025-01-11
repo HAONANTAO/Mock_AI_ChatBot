@@ -50,7 +50,6 @@ const Home = () => {
                 display: "flex",
                 width: isBelowMd ? "80%" : "60%",
                 margin: "auto",
-
                 borderRadius: 20,
                 // 105是模糊半径
                 boxShadow: "-5px -5px  105px#64f3d5",
