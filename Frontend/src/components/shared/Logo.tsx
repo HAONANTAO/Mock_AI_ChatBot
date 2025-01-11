@@ -11,14 +11,14 @@ const Logo = () => {
         alignItems: "center",
         gap: "15px",
       }}>
-      <img
-        src="openai.png"
-        alt="openai image"
-        width={"30px"}
-        height={"30px"}
-        className="image-inverted"
-      />
-      <Link to={"/"}>
+      <Link to={"/"} style={{ display: "flex", gap: 5 }}>
+        <img
+          src="openai.png"
+          alt="openai image"
+          width={"30px"}
+          height={"30px"}
+          className="image-inverted"
+        />
         <Typography
           sx={{
             display: { lg: "block", md: "block", sm: "none", xs: "none" },
@@ -26,7 +26,7 @@ const Logo = () => {
             fontWeight: "800",
             textShadow: "2px 2px 20px #000",
           }}>
-          <span style={{ fontSize: "24px" }}>MERN-GPT</span>
+          <span style={{ fontSize: "24px" }}>Chat-Bot</span>
         </Typography>
       </Link>
     </div>

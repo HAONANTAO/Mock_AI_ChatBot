@@ -31,9 +31,9 @@ const Home = () => {
               my: 10,
             }}>
             <img
-              src="robot.png"
+              src="Robot2.png"
               alt="robot"
-              style={{ width: "200px", margin: "auto" }}
+              style={{ width: "200px", margin: "auto", height: "200px" }}
             />
             <img
               className="image-inverted rotate"
