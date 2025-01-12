@@ -11,7 +11,7 @@ function App() {
   const auth = useAuth();
   return (
     <main>
-      <Header></Header>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>

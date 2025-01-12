@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
-
+import "./App.css";
 // 基础url前缀
 axios.defaults.baseURL = "http://localhost:3000/api/v1";
 // 跨域携带凭证

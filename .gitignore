@@ -1,22 +1,22 @@
-# 前端和后端通用的忽略项
+# common
 .DS_Store
 *.log
 .tmp
 .idea
 .vscode
-.env
 
-# 前端相关忽略项
+
 Frontend/node_modules
-Frontend/package-lock.json
-Frontend/package.json
-Frontend/dist
 Frontend/build
+Frontend/public/build
+Frontend/package-lock.json 
 
-# 后端相关忽略项
+
 Backend/node_modules
-Backend/package-lock.json
-Backend/package.json
 Backend/.env
 Backend/dist
+# ts
 Backend/build
+Backend/.tsbuildinfo
+# MongoDB 
+Backend/data/*.db
