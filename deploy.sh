@@ -1,16 +1,25 @@
 #!/bin/bash
 
 if [ -d "Frontend" ]; then
-  cd Frontend
-  npm install && npm run build || exit 1
-  cd..
+
+    npm install --prefix Frontend && npm run build --prefix Frontend || exit 1
+
+    if [ -d "Frontend/dist" ]; then
+        echo " Frontend/dist "
+    else
+        echo " Frontend/dist no "
+        exit 1
+    fi
 else
-  exit 1
+    echo "Frontend no existed"
+    exit 1
 fi
 
+
 if [ -d "Backend" ]; then
-  cd Backend && npm start || exit 1
-  cd..
+
+    npm install --prefix Backend && npm start --prefix Backend || exit 1
 else
-  exit 1
+    echo "Backend no existed"
+    exit 1
 fi
