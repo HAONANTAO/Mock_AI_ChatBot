@@ -6,7 +6,7 @@ type Props = {
   type: string;
   label: string;
 };
-const CustomisedInput = (props: Props) => {
+const CustomizedInput = (props: Props) => {
   return (
     <>
       {/* 输入框 */}
@@ -32,4 +32,4 @@ const CustomisedInput = (props: Props) => {
   );
 };
 
-export default CustomisedInput;
+export default CustomizedInput;

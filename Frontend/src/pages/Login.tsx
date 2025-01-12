@@ -1,16 +1,17 @@
 import { Box, Typography, Button } from "@mui/material";
 import React, { useEffect } from "react";
-import CustomisedInput from "../components/shared/CustomisedInput";
 import { BiLogInCircle } from "react-icons/bi";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import CustomizedInput from "../components/shared/CustomizedInput.tsx";
+
 const Login = () => {
   const navigator = useNavigate();
   const auth = useAuth();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // 把表单内的数据装进 FormData 对象，准备传输
+    // put all data into the  FormData,ready to transmit
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -29,11 +30,11 @@ const Login = () => {
       navigator("/chat");
       return;
     }
-  }, [auth]);
+  }, [auth, navigator]);
   return (
     <>
       <Box width={"100%"} height={"100%"} display="flex" flex="1">
-        {/* 自适应大小 ，网页和移动端 */}
+        {/* scalability */}
         {/* image机器人 */}
         <Box
           padding={8}
@@ -51,7 +52,7 @@ const Login = () => {
           padding={2}
           ml="auto"
           mt={10}>
-          {/* 表单 */}
+          {/* form part */}
           <form
             onSubmit={handleSubmit}
             action=""
@@ -69,7 +70,7 @@ const Login = () => {
                 justifyContent: "center",
                 height: "300px",
               }}>
-              {/* 文字 */}
+              {/* text */}
               <Typography
                 variant="h3"
                 textAlign={"center"}
@@ -77,8 +78,8 @@ const Login = () => {
                 fontWeight={"800"}>
                 Login
               </Typography>
-              <CustomisedInput type="email" name="email" label="Email" />
-              <CustomisedInput
+              <CustomizedInput type="email" name="email" label="Email" />
+              <CustomizedInput
                 type="password"
                 name="password"
                 label="Password"
@@ -94,7 +95,7 @@ const Login = () => {
                   bgcolor: "white",
                   color: "black",
 
-                  // hover效果
+                  // hover effect
                   ":hover": {
                     bgcolor: "#00fffc",
                     color: "blue",

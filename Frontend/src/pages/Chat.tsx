@@ -19,21 +19,21 @@ type Message = {
 const Chat = () => {
   const navigate = useNavigate();
   const auth = useAuth();
-  // 定位输入框数据
+  // ref located
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const handlerSubmit = async () => {
-    // 拿数据
+    // test log
     console.log(inputRef.current?.value);
 
-    // 先拿数据
+    // take the data first
     const content = inputRef.current?.value as string;
-    // 再清空输入框
+    // clear the input
     if (inputRef && inputRef.current) {
       inputRef.current.value = "";
     }
     const newMessage: Message = { role: "user", content };
-    // 前后新旧都要！
+    // all data needed
     setChatMessages((prev) => [...prev, newMessage]);
 
     // send it to backend
@@ -42,13 +42,13 @@ const Chat = () => {
 
     setChatMessages([...chatData.chats]);
   };
-  // 键盘enter
+  // keyboard enter
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handlerSubmit();
     }
   };
-  // 浏览器绘制前同步执行
+  // 浏览器绘制前同步执行 before the browser render
   useLayoutEffect(() => {
     if (auth?.isLoggedIn && auth.user) {
       toast.loading("Loading the Chats", { id: "loadchats" });
@@ -68,7 +68,7 @@ const Chat = () => {
       navigate("/login");
       return;
     }
-  }, [auth]);
+  }, [auth, navigate]);
   const handleDeleteChats = async () => {
     try {
       toast.loading("Deleting Chats", { id: "deleteChats" });
@@ -91,7 +91,7 @@ const Chat = () => {
           mt: "3",
           gap: "3",
         }}>
-        {/* 左边sidebar */}
+        {/* left side sidebar */}
         <Box
           sx={{
             display: { md: "flex", sm: "none", xs: "none" },
@@ -116,13 +116,13 @@ const Chat = () => {
                 color: "black",
                 fontWeight: 700,
               }}>
-              {/* 名字首字母 */}
+              {/* first Name */}
               {auth?.user?.name[0]}
-              {/* 万一没有第二个last name  */}
+              {/* if there are no last name  */}
               {auth?.user?.name?.split(" ")?.[1]?.[0] ?? ""}
             </Avatar>
 
-            {/* 文字 */}
+            {/* text */}
             <Typography sx={{ mx: "auto", fontFamily: "works sans" }}>
               You are Talking to a ChatBot
             </Typography>
@@ -155,7 +155,7 @@ const Chat = () => {
         </Box>
         {/* sidebar done */}
 
-        {/* 右边盒子 */}
+        {/* right-side box */}
         <Box
           sx={{
             display: "flex",
@@ -165,7 +165,7 @@ const Chat = () => {
             mx: 3,
             my: 3,
           }}>
-          {/* 中心标题文字 */}
+          {/* text */}
           <Typography
             sx={{
               textAlign: "center",
@@ -187,7 +187,7 @@ const Chat = () => {
               mx: "auto",
               display: "flex",
               flexDirection: "column",
-              // 多出去的部分可以滑动，但是横向不用显示了
+              //
               overflow: "scroll",
               overflowX: "hidden",
               overflowY: "auto",
@@ -201,7 +201,7 @@ const Chat = () => {
             })}
           </Box>
 
-          {/* 信息输入框 */}
+          {/* text input */}
           <div
             style={{
               width: "100%",
@@ -226,7 +226,7 @@ const Chat = () => {
                 fontSize: "20px",
               }}
             />
-            {/* 专门设计用于容纳图标并执行相关交互操作， */}
+            {/* interaction with the icon button */}
             <IconButton
               sx={{ ml: "auto", color: "white", mx: 1 }}
               onClick={handlerSubmit}>

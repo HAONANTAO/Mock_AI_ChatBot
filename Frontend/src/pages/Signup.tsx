@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from "@mui/material";
 import React, { useEffect } from "react";
-import CustomisedInput from "../components/shared/CustomisedInput";
+import CustomisedInput from "../components/shared/CustomizedInput";
 import { BiLogInCircle } from "react-icons/bi";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
