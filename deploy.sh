@@ -1,5 +1,5 @@
 #!/bin/bash
-if[ -d "Frontend"];then
+if[ -d "Frontend" ];then
   echo "Enter Frontend folder"
   cd Frontend
   npm install || exit 1
@@ -11,7 +11,7 @@ else
   exit 1
 fi
 
-if[-d "Backend"];then
+if[ -d "Backend" ];then
   echo "Entering Backend folder"
   cd Backend
   npm install || exit 1
