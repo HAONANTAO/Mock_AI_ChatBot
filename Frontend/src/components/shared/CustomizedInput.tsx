@@ -1,6 +1,5 @@
 import { TextField } from "@mui/material";
-import React from "react";
-import "./input.css";
+import "../../App.css";
 type Props = {
   name: string;
   type: string;
@@ -9,7 +8,7 @@ type Props = {
 const CustomizedInput = (props: Props) => {
   return (
     <>
-      {/* 输入框 */}
+      {/* input text */}
       <TextField
         margin="normal"
         name={props.name}

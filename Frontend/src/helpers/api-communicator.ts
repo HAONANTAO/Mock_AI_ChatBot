@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// 用户登录的后端发请求的axios模块函数
+// loginUser
 export const loginUser = async (email: string, password: string) => {
   const res = await axios.post(
     "/user/login",
@@ -19,7 +19,7 @@ export const loginUser = async (email: string, password: string) => {
   return data;
 };
 
-// 注册signup
+// signup User
 export const signupUser = async (
   name: string,
   email: string,

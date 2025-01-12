@@ -6,13 +6,13 @@ const Header = () => {
   const auth = useAuth();
   return (
     <>
-      {" "}
+     
       <AppBar
         sx={{ bgcolor: "transparent", position: "static", boxShadow: "none" }}>
         {/* 放小组件的地方 ，用于承载具体的内容元素 */}
         <Toolbar sx={{ display: "flex" }}>
           <Logo />
-          {/* 检查login了吗 ,*/}
+          {/* check the login,*/}
           <div>
             {auth?.isLoggedIn ? (
               <>
