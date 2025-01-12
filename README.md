@@ -10,19 +10,19 @@
 
 -- [**Prerequisites**](#**Prerequisites**)
 
--- [**Quick Start**](#**Version**)
+-- [**Quick Start**](#**Quick_Start**)
 
 -- [**Features**](#**Features**)
 
--- [**Core Functionality**](#**Core Functionality**)
+-- [**Core Functionality**](#**Core_Functionality**)
 
--- [**Advanced Features**](#**Advanced Features**)
+-- [**Advanced Features**](#**Advanced_Features**)
 
--- [**Project Architecture**](#**Project Architecture**)
+-- [**Project Architecture**](#**Project_Architecture**)
 
--- [**Tech Stack**](#**Tech Stack**)
+-- [**Tech Stack**](#**Tech_Stack**)
 
--- [**API Documentation**](#**API Documentation**)
+-- [**API Documentation**](#**API_Documentation**)
 
 -- [**Demo**](#**Demo**)
 
@@ -30,7 +30,7 @@
 
 -- [**Roadmap**](#**Roadmap**)
 
--- [**Contact Information**](#**Contact Information**)
+-- [**Contact Information**](#**Contact_Information**)
 
 -- [**License**](#**License**)
 
@@ -56,7 +56,7 @@ The Mock ChatBot is an intelligent chatbot application leveraging OpenAI's API t
 - **Backend Dependencies**: Navigate to the project root and execute `npm install`. This will install backend packages like `axios` for HTTP requests, `bcrypt` for password hashing, and `express` for server creation, as detailed in the `package.json`'s `dependencies` and `devDependencies` sections.
 - **Frontend Dependencies**: For the frontend part, also run `npm install` in the relevant directory. Key packages such as `react` for building UIs, `react-dom` for DOM rendering, and UI libraries like `@mui/material` are needed, with their correct versions specified in the `package.json` to ensure compatibility.
 
-# **Quick Start**：
+# **Quick_Start**：
 
 ### **Clone the Repository**
 
@@ -107,8 +107,9 @@ npm install
    - **Sending Chats**: Users can send messages through the chat interface. These messages are then incorporated into the chat history, which is stored per user in the database. The chat history is structured to include both user messages and the subsequent responses from the GPT API.
    - **Receiving GPT Responses**: Once a user message is sent, the application interacts with the OpenAI API (specifically the `gpt-3.5-turbo` model). It sends the chat history, including the latest user message, and retrieves an intelligent response. This response is then added to the user's chat history in the database and presented back to the user.
    - **Chat History Management**: Users have control over their chat history. They can choose to delete their entire chat history. When this action is triggered, the application clears the relevant chat records from the user's data in the database, maintaining user privacy.
+     
 
-# **Core Functionality**：
+# **Core_Functionality**：
 
 1. User Authentication Workflow
 
@@ -124,14 +125,16 @@ npm install
    - **Chat History Building**: As users send messages, the application builds a personalized chat history for each user. This chat history is stored in the database, with each entry marked with the role (either "user" or the role of the chatbot response). The chat history is used not only to display past conversations but also to provide context to the GPT API for more accurate responses.
    - **GPT API Interaction**: The core functionality lies in the seamless integration with the OpenAI `gpt-3.5-turbo` model. User messages from the chat history are packaged and sent to the API. The API's response is then parsed and integrated back into the user's chat history. This back - and - forth interaction creates an intelligent chat experience, mimicking a real - time conversation with an expert.
    - **Data Integrity in Chat Operations**: Throughout the chat process, data integrity is maintained. When deleting chat history, for example, the system ensures that all related records are completely removed from the database, protecting user privacy and optimizing data storage.
+     
 
-# **Advanced Features**：
+# **Advanced_Features**：
 
 more features are comming......
 
 (animations,images......)
 
-# **Project Architecture**：
+
+# **Project_Architecture**：
 
 
 
@@ -164,8 +167,9 @@ The frontend architecture is centered around React, enabling a component - based
   - **Reusable UI Components**: Libraries like `@mui/material` provide a rich set of pre - built components. These are integrated into the application's component tree. For example, buttons, text fields, and cards from `@mui/material` are used across multiple pages. Custom components are also created, following the React paradigm, where each component encapsulates its own state and logic. `@emotion/react` and `@emotion/styled` are used to style these components, enabling in - line CSS - in - JS styling for dynamic and scoped styling.
   - **State - Managed Components**: Redux, along with React Redux, comes into play for components that need to manage complex states. The global user login state, which determines whether a user is authenticated or not, is stored in the Redux store. When a user logs in, the relevant action is dispatched, updating the state across all components that rely on it. Similarly, the chat message state, which holds the conversation history, can be managed centrally, ensuring consistency across different chat - related components.
 - **Build and Tooling**: Vite is the build tool of choice. It speeds up the development process with its fast cold start. During development, it uses ES module features to optimize the loading of JavaScript modules. For production builds, it compresses and minifies the code, resulting in highly optimized bundles. Eslint, along with TypeScript, enforces coding standards. Eslint catches common syntax and style issues, while TypeScript adds type - safety, making the code more maintainable, especially as the project grows. Tools like `React Icons` and `React Syntax Highlighter` are used as utility components, enhancing the visual and interactive aspects of the application.
+  
 
-# **Tech Stack**：
+# **Tech_Stack**：
 
 - **Backend**
 
@@ -201,7 +205,7 @@ The frontend architecture is centered around React, enabling a component - based
 
 
 
-# **API Documentation**：
+# **API_Documentation**：
 
 ## Introduction
 
