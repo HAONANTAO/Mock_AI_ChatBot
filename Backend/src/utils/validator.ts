@@ -21,6 +21,7 @@ export const validate = (validations: ValidationChain[]) => {
     // have error有
   };
 };
+
 // login 验证器
 export const loginValidator = [
   body("email")
@@ -38,6 +39,7 @@ export const loginValidator = [
     .notEmpty()
     .withMessage("Password cannot be empty"),
 ];
+
 // signup单独的检查器
 export const signupValidator = [
   body("name")

@@ -10,6 +10,7 @@ import { COOKIE_NAME, USERNOT } from "../utils/constants.js";
 //   res.status(500).json({ message: "An error occurred", cause: error.message });
 // };
 
+// getAllUser
 export const getAllUser = async (
   req: Request,
   res: Response,
@@ -27,6 +28,7 @@ export const getAllUser = async (
   }
 };
 
+// userSignup
 export const userSignup = async (
   req: Request,
   res: Response,
@@ -85,6 +87,7 @@ export const userSignup = async (
       .json({ message: "error! signup not work!", cause: error.message });
   }
 };
+// userLogin
 export const userLogin = async (
   req: Request,
   res: Response,
@@ -147,6 +150,7 @@ export const userLogin = async (
   }
 };
 
+// verifyUser
 export const verifyUser = async (
   req: Request,
   res: Response,
@@ -172,6 +176,7 @@ export const verifyUser = async (
   }
 };
 
+// logoutUser
 export const logoutUser = async (
   req: Request,
   res: Response,
