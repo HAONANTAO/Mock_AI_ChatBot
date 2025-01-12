@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
-    "build": "tsc -p tsconfig.build.json -b && vite build",
+    "build": "tsc --build && vite build",
     "lint": "eslint --config./.eslintrc.js.",
     "preview": "vite preview --port 4173 --outDir dist"
   },
