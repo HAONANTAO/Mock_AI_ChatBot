@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if[ -d "Frontend" ]; then
+if [ -d "Frontend" ]; then
   cd Frontend
   npm install && npm run build || exit 1
   cd..
