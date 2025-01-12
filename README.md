@@ -1,5 +1,7 @@
 # 				***The Chat-Bot***
 
+![Chatbot Demo](ChatBot_Demo.gif)
+
 # **Table Of Content**:
 
 -- [**Description**](#**Description**)
@@ -65,6 +67,8 @@ The Mock ChatBot is an intelligent chatbot application leveraging OpenAI's API t
   cd Mock_AI_ChatBot
   ```
 
+
+
 ### Install Dependencies
 
 - For both the front-end and back-end, run `npm i` in the root project directory. This will install all the packages listed in the `dependencies` and `devDependencies` sections of the `package.json` files for both parts of the application.
@@ -74,12 +78,14 @@ The Mock ChatBot is an intelligent chatbot application leveraging OpenAI's API t
 npm install
 ```
 
+
+
 ### Running the Code
 
 - Start the Backend first then running the Frontend.
 
   ```
-  npm run
+  npm run dev
   ```
 
   
@@ -87,12 +93,17 @@ npm install
 # **Features**：
 
 1. User Management
+
    - **Signup**: Creating an account is a breeze. Users simply input their name, email, and password. The system then securely hashes the password using `bcrypt` with a cost factor of 10, storing it in the database. Once registered, users receive a confirmation message along with details of their new account.
    - **Login**: Existing users can log in with their email and password. The application checks if the user exists in the database and then verifies the password using `bcrypt`'s `compare` function. Upon successful login, a token is generated and set as an HTTP-only cookie, which helps in maintaining the user's session across different requests.
    - **Logout**: When it's time to end the session, users can log out. The system clears the relevant authentication cookie, ensuring that the user's session is terminated, and their account remains secure.
    - **Verification**: User verification is seamless. By validating the user ID from the JWT token against the database, the application ensures that the user making requests has proper authorization. This helps in protecting user-specific data and actions.
    - **User Retrieval**: Admins or relevant endpoints can fetch a list of all users. The `getAllUser` function queries the database for all user records, providing an overview of the user base when needed.
+
+   
+
 2. Chat Functionality
+
    - **Sending Chats**: Users can send messages through the chat interface. These messages are then incorporated into the chat history, which is stored per user in the database. The chat history is structured to include both user messages and the subsequent responses from the GPT API.
    - **Receiving GPT Responses**: Once a user message is sent, the application interacts with the OpenAI API (specifically the `gpt-3.5-turbo` model). It sends the chat history, including the latest user message, and retrieves an intelligent response. This response is then added to the user's chat history in the database and presented back to the user.
    - **Chat History Management**: Users have control over their chat history. They can choose to delete their entire chat history. When this action is triggered, the application clears the relevant chat records from the user's data in the database, maintaining user privacy.
@@ -100,11 +111,16 @@ npm install
 # **Core Functionality**：
 
 1. User Authentication Workflow
+
    - **Secure Signup**: At the heart of the application is a robust user signup process. When a user submits their name, email, and password, the system uses `bcrypt` to hash the password. This hashed password is then stored in the database alongside the user's other details. This ensures that user passwords are never stored in plain text, safeguarding against potential data breaches.
    - **Reliable Login**: For login, the system first locates the user by their email in the database. It then uses `bcrypt`'s `compare` function to verify the entered password against the stored hashed version. If the comparison is successful, a JWT token is generated. This token is crucial as it authenticates the user across different requests, allowing access to protected routes.
    - **Cookie - Based Session Management**: Once logged in, an HTTP - only cookie is set with the JWT token. This cookie serves as the cornerstone of the user's session. It adheres to strict security policies, like having a specific domain and path, and being marked as `httpOnly` to prevent cross - site scripting (XSS) attacks from stealing the token.
    - **Logout and Cleanup**: When a user logs out, the system clears the authentication cookie. This simple yet vital step effectively ends the user's session, ensuring that any unauthorized access attempts using the previous session's credentials are thwarted.
+
+   
+
 2. Chatbot Integration with User Data
+
    - **Chat History Building**: As users send messages, the application builds a personalized chat history for each user. This chat history is stored in the database, with each entry marked with the role (either "user" or the role of the chatbot response). The chat history is used not only to display past conversations but also to provide context to the GPT API for more accurate responses.
    - **GPT API Interaction**: The core functionality lies in the seamless integration with the OpenAI `gpt-3.5-turbo` model. User messages from the chat history are packaged and sent to the API. The API's response is then parsed and integrated back into the user's chat history. This back - and - forth interaction creates an intelligent chat experience, mimicking a real - time conversation with an expert.
    - **Data Integrity in Chat Operations**: Throughout the chat process, data integrity is maintained. When deleting chat history, for example, the system ensures that all related records are completely removed from the database, protecting user privacy and optimizing data storage.
@@ -126,8 +142,12 @@ The backend of the application is structured around a Node.js server, leveraging
 - **Layered Structure**:
 
   - **Middleware Layer**: Express.js forms the core of this layer. It acts as a middleware framework, intercepting incoming HTTP requests. Middlewares like `cors` are used first to handle cross-origin requests, allowing seamless communication from different front-end domains. `cookie-parser` and `express-validator` also operate here. The former manages cookies, crucial for maintaining user sessions, while the latter validates incoming data, ensuring only legitimate data progresses further into the application. `morgan` logs every incoming request, providing valuable debugging information.
+
   - **Business Logic Layer**: This is where the application's core functionality is coded. Written in TypeScript, it benefits from type checking to keep the codebase robust. For user management, functions related to user signup, login, and logout are implemented. Here, `bcrypt` is integrated to hash passwords during signup and verify them at login. `jsonwebtoken (JWT)` is used to generate authentication tokens, which are then passed to the client via cookies. When it comes to chat functionality, the logic to interact with the OpenAI API using `axios` is housed here. It constructs requests with the appropriate chat history, retrieved from the database, and processes the responses.
+
   - **Data Access Layer**: Mongoose serves as the bridge to the MongoDB database. It provides an object - model mapping, allowing developers to define data models in a more JavaScript - friendly way. User data, including names, emails, and hashed passwords, as well as chat records, are stored in MongoDB collections. The flexible document model of MongoDB means that the chat records, which can have variable structures, can be easily stored and retrieved without complex schema migrations. `dotenv` is used to manage sensitive data, like API keys, ensuring that the database connection and external API calls are secure.
+
+    
 
 - **API Endpoints**: Express.js is used to define RESTful API endpoints. These endpoints act as the interface between the front-end and the backend. For example, there are endpoints for user authentication such as `/signup`, `/login`, and `/logout`. The chat functionality has endpoints like `/sendChat` to receive user messages and `/getChats` to retrieve chat history. Each endpoint is designed to accept requests in a specific format, perform the necessary business logic, and return appropriate responses, often in JSON format.
 
@@ -148,6 +168,7 @@ The frontend architecture is centered around React, enabling a component - based
 # **Tech Stack**：
 
 - **Backend**
+
   - **Node.js**: Serves as the runtime environment for the backend server. Its asynchronous, non-blocking I/O capabilities enable it to handle a large number of concurrent requests efficiently, providing a stable foundation for the entire application.
   - **Express.js**: A minimalist and flexible web application framework built on Node.js. It manages routing and integrates middlewares, making it straightforward to construct RESTful APIs. This simplifies the data exchange between the front-end and the back-end.
   - **TypeScript**: Adds a static type system to JavaScript. It enhances code readability, maintainability, and scalability. When writing complex business logic in the backend, it catches type-related errors early, thus improving code quality.
@@ -161,7 +182,11 @@ The frontend architecture is centered around React, enabling a component - based
   - **cookie-parser**: Facilitates the parsing, setting, and management of HTTP cookies in the backend. In scenarios like user login and logout, it precisely manipulates cookie data related to the user session.
   - **express-validator**: Provides input validation functionality for the Express framework. When receiving data from the front-end, such as user registration or login form data, it checks the legality of the data, preventing illegal data from entering the backend business logic.
   - **morgan**: An HTTP request logging middleware. It records detailed information about requests, including access time, request method, and response status code. This is useful for development debugging and later operation and maintenance monitoring.
+
+  
+
 - **Frontend**
+
   - **React**: A JavaScript library for building user interfaces. Through the component-based development model, it breaks down the UI into reusable and maintainable components, enabling efficient development of interactive front-end pages.
   - **React Router DOM**: Enables routing functionality within React applications. It creates navigation logic between different pages in a single-page application, allowing users to switch between various feature pages without a full-page refresh.
   - **Vite**: A new-generation front-end build tool. Compared to traditional build tools, it has an extremely fast cold start speed. It leverages the native features of ES modules to optimize the development experience and can generate highly optimized production build packages.
