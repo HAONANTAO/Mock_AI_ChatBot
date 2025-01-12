@@ -180,165 +180,128 @@ The frontend architecture is centered around React, enabling a component - based
 
 ## Introduction
 
-
-
 This API documentation outlines the endpoints available for the application, which consists of user management and chat functionality. The API is built using Express.js, and it uses JSON for data exchange.
+
+
 
 ## Base URL
 
-
-
 All API endpoints are prefixed with `/api/v1`.
+
+
 
 ## User Routes
 
 ### `GET /user/`
 
-
-
 - **Description**: Retrieves a list of all users. This endpoint is likely intended for administrative purposes to view the user base.
 
 - **Request**: No parameters are required.
 
-- Response
-
-  :
+- Response:
 
   - **Success (HTTP 200)**: Returns a JSON object with the structure `{"message": "OK", "users": [user1, user2,...]}` where each `user` object contains details such as name, email, etc.
+
   - **Failure (HTTP 400)**: In case of an error, returns `{"message": "error! not ok!", "cause": "error message"}` where the `error message` details the issue, e.g., a database connection error.
+
+    
 
 ### `POST /user/signup`
 
-
-
 - **Description**: Allows new users to create an account. The user must provide their name, email, and password in the request body.
 
-- Request
+- Request:
 
-  :
-
-  - Body
-
-    :
-
+  - Body:
     - `name` (string): The user's full name.
     - `email` (string): A valid email address.
     - `password` (string): The user's chosen password.
 
-- Response
-
-  :
+- Response:
 
   - **Success (HTTP 201)**: Returns `{"message": "user [name], [email] sign up successfully!", "name": "user name", "email": "user email"}`
+
   - **Failure (HTTP 400)**: If there's an issue during signup, like an invalid email format or a database error, returns `{"message": "error! signup not work!", "cause": "error message"}`
+
+    
 
 ### `POST /user/login`
 
-
-
 - **Description**: Enables existing users to log into their accounts. Users need to send their email and password in the request body.
 
-- Request
+- Request:
 
-  :
-
-  - Body
-
-    :
-
+  - Body:
     - `email` (string): The user's registered email address.
     - `password` (string): Their password.
 
-- Response
-
-  :
+- Response:
 
   - **Success (HTTP 200)**: Returns `{"message": "user [name], [email] log in successfully!", "name": "user name", "email": "user email"}`
+
   - **Failure (HTTP 201)**: If the user is not registered, returns `"user not registered,please check again "`. If the password is incorrect, returns `{"message": "Incorrect password"}`
+
   - **Other Failures (HTTP 404)**: For general errors, returns `{"message": "error! signup not work!", "cause": "error message"}`
+
+    
 
 ### `GET /user/auth-status`
 
-
-
 - **Description**: Verifies the authentication status of the currently logged-in user. This requires a valid authentication token.
-
 - **Request**: The user must have a valid JWT token. The token is typically sent via an HTTP - only cookie.
-
-- Response
-
-  :
-
+- Response:
   - **Success (HTTP 200)**: Returns `{"message": "OK", "name": "user name", "email": "user email"}` if the user is authenticated.
   - **Failure (HTTP 401)**: If the token is invalid or the user cannot be found, returns `{"message": "Unauthorized", "cause": "error message"}`
 
 ### `GET /user/logout`
 
-
-
 - **Description**: Logs out the currently logged-in user by clearing the authentication cookie.
 
 - **Request**: Requires a valid JWT token (sent via cookie).
 
-- Response
-
-  :
+- Response:
 
   - **Success (HTTP 200)**: Returns `{"message": "OK", "name": "user name", "email": "user email"}`
   - **Failure (HTTP 401)**: If there's an issue with the token or user verification, returns `{"message": "Unauthorized", "cause": "error message"}`
+
+  
 
 ## Chat Routes
 
 ### `POST /chat/new`
 
+**Description**: Sends a new chat message from the user and retrieves a response from the GPT API. The message should be included in the request body.
 
+- Request:
 
-- **Description**: Sends a new chat message from the user and retrieves a response from the GPT API. The message should be included in the request body.
-
-- Request
-
-  :
-
-  - Body
-
-    :
-
+  - Body:
     - `message` (string): The chat message the user wants to send.
 
-- Response
-
-  :
+- Response:
 
   - **Success (HTTP 200)**: Returns `{"chats": [chat1, chat2,...]}` where each `chat` object represents a message in the chat history, including user messages and GPT responses.
   - **Failure (HTTP 500)**: If there's an issue while interacting with the GPT API, returns `{"message": "Something wrong while the GPT chat api"}`
 
+  
+
 ### `GET /chat/all-chats`
-
-
 
 - **Description**: Fetches all the chat history for the currently logged-in user.
 
 - **Request**: Requires a valid JWT token (sent via cookie).
 
-- Response
-
-  :
+- Response:
 
   - **Success (HTTP 200)**: Returns `{"message": "OK", "chats": [chat1, chat2,...]}` showing the chat history.
   - **Failure (HTTP 401)**: If the token is invalid or the user cannot be found, returns `{"message": "Unauthorized", "cause": "error message"}`
 
+  
+
 ### `DELETE /chat/delete`
 
-
-
 - **Description**: Deletes all the chat history for the currently logged-in user.
-
 - **Request**: Requires a valid JWT token (sent via cookie).
-
-- Response
-
-  :
-
+- Response:
   - **Success (HTTP 200)**: Returns `{"message": "OK"}`
   - **Failure (HTTP 401)**: If the token is invalid or the user cannot be found, returns `{"message": "Unauthorized", "cause": "error message"}`
 
@@ -366,32 +329,33 @@ All API endpoints are prefixed with `/api/v1`.
 
 # **Roadmap**：
 
-## Short-Term (Next 1 - 3 Months)
+## Short-Term (Next 1 - 2 Weeks)
 
 ### Feature Enhancements
 
-
-
 - User Interface Refinement
+
   - Improve the overall look and feel of the signup and login pages. Conduct user testing to gather feedback on the current layout, color scheme, and ease of use. Based on the results, implement changes to enhance visual appeal and streamline the user experience, such as simplifying form fields or adding more intuitive error messages.
   - Optimize the chat interface for mobile devices. Ensure that all chat functionality, including sending messages, viewing responses, and managing chat history, is fully accessible and responsive on smartphones and tablets.
+
 - Error Handling
+
   - Implement more detailed error messages across the application. Instead of generic error responses, provide users with clear explanations about what went wrong when they encounter issues during signup, login, or chat operations. This will reduce user frustration and improve the self-help capabilities of the users.
   - Log errors more comprehensively in the backend. Currently, basic error logging exists, but expand it to include more context, like the full stack trace, the user ID (if available), and the sequence of API calls that preceded the error. This will significantly speed up the debugging process for developers.
 
+  
+
 ### Integration Improvements
-
-
 
 - OpenAI API
   - Explore additional parameters and features offered by the GPT API. For instance, experiment with different temperature settings to fine-tune the creativity and precision of the chatbot responses. This could lead to more personalized and engaging conversations with users.
   - Set up a caching mechanism for frequently asked questions. By caching common GPT responses, we can reduce API calls, lower costs, and improve response times for users.
 
-## Medium-Term (Next 3 - 6 Months)
+
+
+## Medium-Term (Next 3 - 4 Weeks)
 
 ### New Features
-
-
 
 - Social Sharing
   - Add the ability for users to share interesting chat conversations on social media platforms. This would require integrating with popular social media APIs, like Facebook, Twitter, or LinkedIn, and generating shareable links or pre-filled posts that showcase the chat exchange.
@@ -402,17 +366,16 @@ All API endpoints are prefixed with `/api/v1`.
 
 ### Performance Optimization
 
-
-
 - Database Optimization
+
   - Analyze the MongoDB queries related to chat history and user data. Identify slow queries and optimize them, perhaps by adding proper indexes to frequently accessed fields. This will lead to faster data retrieval and storage, especially as the user base grows.
   - Consider implementing a data archiving strategy for old chat history. Instead of keeping all chat records indefinitely, archive infrequently accessed data to reduce the overall database size and improve query performance.
 
-## Long-Term (Over 6 Months)
+  
+
+## Long-Term (Over 4 Weeks)
 
 ### Advanced Functionality
-
-
 
 - Custom Chatbot Personas
   - Develop a feature that allows users to select from different chatbot personas. For example, a user could choose a technical expert persona for in-depth tech support, or a friendly conversationalist persona for casual chats. Each persona would have its own set of predefined responses and interaction styles.
@@ -422,8 +385,6 @@ All API endpoints are prefixed with `/api/v1`.
   - Conduct regular security audits of the entire application stack, including the codebase, dependencies, and infrastructure. Hire external security experts to perform penetration testing and suggest security best practices.
 
 ### Scalability
-
-
 
 - Cloud Migration
   - Evaluate migrating the application to a cloud-based infrastructure, such as Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure. Cloud providers offer scalable resources that can handle increased traffic, storage, and computing requirements as the user base expands.
@@ -441,12 +402,16 @@ linkin:https://www.linkedin.com/in/haonan-tao-aaron
 
 # **License**：
 
-License
-This project is licensed under the MIT License.
-MIT License Text
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is provided to do the same, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR ANYTHING DONE WITH THE SOFTWARE.
-By choosing the MIT license, we aim to promote an open and collaborative development environment. Developers are free to fork, improve, and integrate this project into their own works, as long as they retain the appropriate copyright notices. This license is popular for its simplicity and permissiveness, which encourages a wide range of contributions from the open-source community. Whether you're an individual hacker looking to tinker with the code or a large organization seeking to build on top of our foundation, the MIT license gives you the freedom to do so.
+This project is licensed under the MIT License, which is detailed as follows:
+
+## MIT License Text
+
+Permission is hereby freely granted to any individual or entity that obtains a copy of this software, along with its associated documentation files (collectively referred to as the "Software"). Recipients have unrestricted rights to engage with the Software. This includes, but is not limited to, the rights to use, duplicate, adapt, merge, publish, disseminate, sublicense, and even sell copies of the Software. Moreover, those who receive the Software are also permitted to carry out the same actions, subject to the conditions below.
+
+It is mandatory that the above-mentioned copyright notice and this permission notice be incorporated into all copies, or any substantial segments, of the Software.
+
+The Software is offered on an "as is" basis. There are no warranties of any kind, whether expressed or implied. This encompasses, but is not restricted to, warranties regarding merchantability, suitability for a specific purpose, and non-infringement. Under no circumstances shall the authors or copyright holders be held accountable for any claims, damages, or other liabilities. These could arise from actions related to contracts, torts, or other legal causes, and be directly or indirectly connected to the Software, or any activities performed using it.
+
+By opting for the MIT license, our intention is to foster an open, collaborative development ecosystem. Developers are at liberty to fork the project, enhance it, and integrate it into their own undertakings, provided that they preserve the relevant copyright notices. This license is favored for its straightforwardness and permissive nature, which spurs a diverse array of contributions from the open-source community. Whether you're an independent coder eager to experiment with the code, or a large enterprise looking to build upon our groundwork, the MIT license endows you with the necessary freedom.
 
 
