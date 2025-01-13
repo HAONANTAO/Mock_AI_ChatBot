@@ -13,7 +13,7 @@ if [ -d "Frontend" ]; then
         exit 1
     fi
     echo "before cd.. in frontend part :$(pwd)"
-    cd..
+    cd ..
     echo "after cd.. in frontend part :$(pwd)"
 else
     echo "The Frontend folder does not exist"
@@ -28,7 +28,7 @@ if [ -d "Backend" ]; then
     npm run build
     npm start
     echo "before cd.. in backend part :$(pwd)"
-    cd..
+    cd ..
     echo "after cd.. in backend part :$(pwd)"
 else 
     echo "The backend folder not here"
