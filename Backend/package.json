@@ -6,7 +6,7 @@
   "type": "module",
  "scripts": {
     "dev": "nodemon -e ts,json -w src -x \"tsc && node dist/index.js\"",
-    "build": "npm install && tsc --noEmitOnError --pretty",
+    "build": "tsc --noEmitOnError --pretty",
     "start": "node dist/index.js"
   },
   "keywords": [],
