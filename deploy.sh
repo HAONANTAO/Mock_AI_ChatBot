@@ -1,25 +1,32 @@
 #!/bin/bash
 
+# Process the frontend
 if [ -d "Frontend" ]; then
-
-    npm install --prefix Frontend && npm run build --prefix Frontend || exit 1
-
+    cd Frontend
+    npm install
+    npm update vite --save-dev
+    npm run build
     if [ -d "Frontend/dist" ]; then
-        echo " Frontend/dist "
+        echo "The frontend build artifacts are in the Frontend/dist directory"
     else
-        echo " Frontend/dist no "
+        echo "The Frontend/dist directory for frontend build artifacts does not exist. Check the build process."
         exit 1
     fi
+    cd..
 else
-    echo "Frontend no existed"
+    echo "The Frontend folder does not exist"
     exit 1
 fi
 
-
+# Process the backend
 if [ -d "Backend" ]; then
-
-    npm install --prefix Backend && npm start --prefix Backend || exit 1
-else
-    echo "Backend no existed"
+    cd Backend
+    npm install
+    npm install typescript @types/node --save-dev
+    npm run build
+    npm start
+    cd..
+else 
+    echo "The backend folder not here"
     exit 1
 fi
