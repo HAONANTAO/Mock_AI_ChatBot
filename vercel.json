@@ -10,7 +10,7 @@
       }
     },
     {
-      "src": "Frontend/dist/**/*.{html,js,css,json}",
+      "src": "Frontend/public/**/*",
       "use": "@vercel/static",
       "config": {
         "maxFiles": 10000,
