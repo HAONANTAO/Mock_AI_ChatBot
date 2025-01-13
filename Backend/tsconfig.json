@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-    "module": "commonJS",
-    "moduleResolution": "Node",
+    "module": "NodeNext",
+    "moduleResolution": "Nodenext",
     "target": "ES2022",
     "sourceMap": true,
     "outDir": "dist",
     "allowSyntheticDefaultImports": true,
     "noEmitOnError": true,
-    "pretty": true
+    "pretty": true,
+    "skipLibCheck": true,
+    "diagnostics": true
   },
   "include": ["src/**/*.ts", "src/index.ts"]
 }
