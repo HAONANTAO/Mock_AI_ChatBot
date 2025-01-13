@@ -12,7 +12,9 @@ if [ -d "Frontend" ]; then
         echo "The Frontend/dist directory for frontend build artifacts does not exist. Check the build process."
         exit 1
     fi
+    echo "before cd.. in frontend part :$(pwd)"
     cd..
+    echo "after cd.. in frontend part :$(pwd)"
 else
     echo "The Frontend folder does not exist"
     exit 1
@@ -25,7 +27,9 @@ if [ -d "Backend" ]; then
     npm install typescript @types/node --save-dev
     npm run build
     npm start
+    echo "before cd.. in backend part :$(pwd)"
     cd..
+    echo "after cd.. in backend part :$(pwd)"
 else 
     echo "The backend folder not here"
     exit 1
