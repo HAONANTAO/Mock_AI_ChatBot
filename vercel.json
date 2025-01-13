@@ -2,19 +2,10 @@
   "version": 2,
   "builds": [
     {
-      "src": "Frontend/*.{html,js,css,json}",
-      "use": "@vercel/static",
+      "src": "deploy.sh",
+      "use": "@vercel/now-build-utils@2",
       "config": {
-        "maxFiles": 10000,
-        "distDir": "Frontend/dist"
-      }
-    },
-    {
-      "src": "Backend/src/**/*.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxFiles": 10000,
-        "distDir": "Backend/dist"
+        "maxFiles": 10000
       }
     }
   ],
@@ -32,6 +23,5 @@
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "outputDirectory": "dist"
+  }
 }
