@@ -33,4 +33,3 @@ else
     echo "The Frontend folder does not exist"
     exit 1
 fi
-
