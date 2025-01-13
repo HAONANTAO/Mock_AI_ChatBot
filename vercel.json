@@ -10,7 +10,7 @@
       }
     },
     {
-      "src": "Frontend/src/**/*.{html,js,css,json}",
+      "src": "Frontend/dist/**/*.{html,js,css,json}",
       "use": "@vercel/static",
       "config": {
         "maxFiles": 10000,
@@ -32,11 +32,5 @@
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "api/**/*.js": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
   }
 }
