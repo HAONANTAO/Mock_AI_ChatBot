@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.ts",
   "type": "module",
-  "scripts": {
+ "scripts": {
     "dev": "nodemon -e ts,json -w src -x \"tsc && node dist/index.js\"",
-    "build": "tsc",
+    "build": "npm install && tsc --noEmitOnError --pretty",
     "start": "node dist/index.js"
   },
   "keywords": [],
