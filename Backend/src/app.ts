@@ -10,7 +10,7 @@ config();
 const app = express();
 // 跨域
 app.use(
-  cors({ origin: "https://mock-ai-chat-bot.vercel.app/", credentials: true }),
+  cors({ origin: "https://mock-ai-chat-bot.vercel.app", credentials: true }),
 );
 // 日志输出记录，为开发环境
 app.use(morgan("dev"));

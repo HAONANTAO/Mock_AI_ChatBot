@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Frontend/*.{html,js,css,json}",
+      "use": "@vercel/static",
+      "config": {
+        "maxFiles": 10000,
+        "distDir": "Frontend/dist"
+      }
+    },
+    {
+      "src": "Backend/src/**/*.js",
+      "use": "@vercel/node",
+      "config": {
+        "maxFiles": 10000,
+        "distDir": "Backend/dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/v1/(.*)",
+      "dest": "/api/v1/$1",
+      "methods": ["GET", "POST", "PUT", "DELETE"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/Frontend/dist/$1",
+      "methods": ["GET"]
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "analytics": false,
+  "outputDirectory": "dist"
+}
