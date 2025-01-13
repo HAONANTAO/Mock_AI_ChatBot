@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# Process the backend
+if [ -d "Backend" ]; then
+    cd Backend
+    npm install
+    npm install typescript @types/node --save-dev
+    npm run build
+    npm start
+    echo "before cd.. in backend part :$(pwd)"
+    cd ..
+    echo "after cd.. in backend part :$(pwd)"
+else 
+    echo "The backend folder not here"
+    exit 1
+fi
+
 # Process the frontend
 if [ -d "Frontend" ]; then
     cd Frontend
@@ -20,17 +35,3 @@ else
     exit 1
 fi
 
-# Process the backend
-if [ -d "Backend" ]; then
-    cd Backend
-    npm install
-    npm install typescript @types/node --save-dev
-    npm run build
-    npm start
-    echo "before cd.. in backend part :$(pwd)"
-    cd ..
-    echo "after cd.. in backend part :$(pwd)"
-else 
-    echo "The backend folder not here"
-    exit 1
-fi
