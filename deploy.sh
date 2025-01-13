@@ -19,7 +19,6 @@ fi
 if [ -d "Frontend" ]; then
     cd Frontend
     npm install
-    npm update vite --save-dev
     npm run build
     if [ -d "Frontend/dist" ]; then
         echo "The frontend build artifacts are in the Frontend/dist directory"
