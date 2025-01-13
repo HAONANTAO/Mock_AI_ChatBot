@@ -2,10 +2,19 @@
   "version": 2,
   "builds": [
     {
-      "src": "deploy.sh",
-      "use": "@vercel/exec-sh",
+      "src": "Backend/src/**/*.js",
+      "use": "@vercel/node",
       "config": {
-        "maxFiles": 10000
+        "maxFiles": 10000,
+        "distDir": "Backend/dist"
+      }
+    },
+    {
+      "src": "Frontend/dist/**/*.{html,js,css,json}",
+      "use": "@vercel/static",
+      "config": {
+        "maxFiles": 10000,
+        "distDir": "Frontend/dist"
       }
     }
   ],
