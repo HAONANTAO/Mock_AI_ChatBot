@@ -3,7 +3,7 @@
   "builds": [
     {
       "src": "deploy.sh",
-      "use": "@vercel/now-build-utils@2",
+      "use": "@vercel/exec-sh",
       "config": {
         "maxFiles": 10000
       }
