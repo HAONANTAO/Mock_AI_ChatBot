@@ -33,6 +33,5 @@
   "env": {
     "NODE_ENV": "production"
   },
-  "analytics": false,
   "outputDirectory": "dist"
 }
