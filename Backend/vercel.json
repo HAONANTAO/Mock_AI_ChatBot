@@ -1,10 +1,10 @@
 {
   "functions": {
     "dist/routes/user-routes.js": {
-      "runtime": "nodejs20.x"
+      "runtime": "nodejs14.x"
     },
     "dist/routes/chat-routes.js": {
-      "runtime": "nodejs20.x"
+      "runtime": "nodejs14.x"
     }
   },
   "routes": [
