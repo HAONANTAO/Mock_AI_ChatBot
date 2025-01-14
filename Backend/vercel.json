@@ -1,14 +1,14 @@
 {
   "functions": {
-    "src/routes/user-routes.js": {
+    "dist/routes/user-routes.js": {
       "runtime": "nodejs20.x"
     },
-    "src/routes/chat-routes.js": {
+    "dist/routes/chat-routes.js": {
       "runtime": "nodejs20.x"
     }
   },
   "routes": [
-    { "src": "/api/v1/user/(.*)", "dest": "/src/routes/user-routes.js" },
-    { "src": "/api/v1/chat/(.*)", "dest": "/src/routes/chat-routes.js" }
+    { "src": "/api/v1/user/(.*)", "dest": "/dist/routes/user-routes.js" },
+    { "src": "/api/v1/chat/(.*)", "dest": "/dist/routes/chat-routes.js" }
   ]
 }
