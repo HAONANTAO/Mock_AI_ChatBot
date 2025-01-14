@@ -4,34 +4,44 @@ import { connectedToDatabase, disconnectToDatabase } from "./db/connection.js";
 import appRouter from "./routes/index.js";
 
 const app = express();
-// 配置处理 JSON 数据的中间件
+// 配置处理 JSON 数据的中间ware
 app.use(express.json());
-const port = process.env.PORT || 3000;
 
-async function main() {
+// 在服务器初始化时注册路由
+app.use(appRouter);
+
+// 数据库连接和服务器启动
+async function initializeServer() {
   try {
     await connectedToDatabase();
     console.log("Database connection established.");
-
-    app.use(appRouter);
-
-    app.get("/", (req, res) => {
-      res.send("Hello, world!");
-    });
-
-    // 这里不能使用 app.listen 在 Serverless 环境，需移除
-    // const server = app.listen(port, () => {
-    //     console.log(`Server is running on port ${port}`);
-    // });
   } catch (error) {
     console.error("Database connection failed:", error);
-    // 考虑在连接失败时关闭程序或进行其他错误处理
     process.exit(1);
   }
 }
 
-main().catch((error) => {
-  console.error("Error in main function:", error);
-  // 处理 main 函数中未捕获的错误
-  process.exit(1);
+// 导出处理请求的函数
+export default async function handler(req, res) {
+  try {
+    // 调用路由处理函数
+    app(req, res);
+  } catch (error) {
+    console.error("Error processing request:", error);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+}
+
+// 服务器关闭时断开数据库连接
+process.on("SIGTERM", async () => {
+  try {
+    await disconnectToDatabase();
+    console.log("Disconnected from the database.");
+  } catch (error) {
+    console.error("Error disconnecting from database:", error);
+  }
+  process.exit(0);
 });
+
+// 初始化服务器
+initializeServer();
