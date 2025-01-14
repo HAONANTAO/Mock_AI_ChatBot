@@ -17,23 +17,33 @@ import serverless from "serverless-http";
 const userRoutes = Router();
 
 // 定义路由和中间件
-userRoutes.get("/", getAllUser);
+userRoutes.get("/", (req, res, next) => {
+  getAllUser(req, res, next);
+});
 
 userRoutes.get("/test", (req, res) => {
   console.log("test good here");
   res.send("test good");
 });
 
-userRoutes.post("/signup", validate(signupValidator), userSignup);
+userRoutes.post("/signup", validate(signupValidator), (req, res, next) => {
+  userSignup(req, res, next);
+});
 
-userRoutes.post("/login", validate(loginValidator), userLogin);
+userRoutes.post("/login", validate(loginValidator), (req, res, next) => {
+  userLogin(req, res, next);
+});
 
-userRoutes.get("/auth-status", verifyToken, verifyUser);
+userRoutes.get("/auth-status", verifyToken, (req, res, next) => {
+  verifyUser(req, res, next);
+});
 
-userRoutes.get("/logout", verifyToken, logoutUser);
+userRoutes.get("/logout", verifyToken, (req, res, next) => {
+  logoutUser(req, res, next);
+});
 
-// 导出 serverless 处理函数
-export const handler = serverless((req, res, next) => {
+// 导出命名函数
+export const userRoutesHandler = serverless((req, res, next) => {
   try {
     userRoutes(req, res, next);
   } catch (error) {
@@ -41,3 +51,5 @@ export const handler = serverless((req, res, next) => {
     res.status(500).send({ error: "Internal Server Error" });
   }
 });
+
+export { userRoutes };

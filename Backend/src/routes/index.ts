@@ -1,6 +1,6 @@
 import { Router } from "express";
-import userRoutes from "./user-routes.js";
-import chatRoutes from "./chat-routes.js";
+import { userRoutes, userRoutesHandler } from "./user-routes.js";
+import { chatRoutes, chatRoutesHandler } from "./chat-routes.js";
 
 // 主路由创建router
 const appRouter = Router();

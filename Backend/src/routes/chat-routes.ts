@@ -15,15 +15,21 @@ chatRoutes.post(
   "/new",
   validate(chatCompletionValidator),
   verifyToken,
-  generateChatCompletion,
+  (req, res, next) => {
+    generateChatCompletion(req, res, next);
+  },
 );
 
-chatRoutes.get("/all-chats", verifyToken, sendChatsToUser);
+chatRoutes.get("/all-chats", verifyToken, (req, res, next) => {
+  sendChatsToUser(req, res, next);
+});
 
-chatRoutes.delete("/delete", verifyToken, deleteChats);
+chatRoutes.delete("/delete", verifyToken, (req, res, next) => {
+  deleteChats(req, res, next);
+});
 
-// 导出 serverless 处理函数
-export const handler = serverless((req, res, next) => {
+// 导出命名函数
+export const chatRoutesHandler = serverless((req, res, next) => {
   try {
     chatRoutes(req, res, next);
   } catch (error) {
@@ -31,3 +37,5 @@ export const handler = serverless((req, res, next) => {
     res.status(500).send({ error: "Internal Server Error" });
   }
 });
+
+export { chatRoutes };
