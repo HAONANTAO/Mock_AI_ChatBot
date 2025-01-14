@@ -1,8 +1,0 @@
-{
-  "functions": {
-    "routes/user-routes.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "routes": [{ "src": "/api/v1/(.*)", "dest": "/routes/user-routes.js" }]
-}
