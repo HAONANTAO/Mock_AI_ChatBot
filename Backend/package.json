@@ -5,11 +5,11 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-  "dev": "nodemon -e ts,json -w src -x \"tsc --noEmitOnError --pretty && node dist/index.js\"",
-  "build": "tsc --noEmitOnError --pretty --outDir dist",
-  "vercel-build": "tsc --noEmitOnError --pretty --outDir dist",
-  "vercel-dev": "vercel dev"  
-},
+    "dev": "nodemon -e ts,json -w src -x \"tsc --noEmitOnError --pretty && node dist/index.js\"",
+    "build": "tsc --noEmitOnError --pretty --outDir dist",
+    "vercel-build": "tsc --noEmitOnError --pretty --outDir dist",
+    "vercel-dev": "vercel dev"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -25,7 +25,8 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.2",
     "morgan": "^1.10.0",
-    "openai": "^3.3.0"
+    "openai": "^3.3.0",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

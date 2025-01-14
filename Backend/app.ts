@@ -1,17 +1,16 @@
 import express from "express";
 import { config } from "dotenv";
 import morgan from "morgan";
-import appRouter from "../src/routes/index.js";
+import appRouter from "./src/routes/index.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import mongoose from "mongoose";
-import {
-  connectedToDatabase,
-  disconnectToDatabase,
-} from "../src/db/connection.js";
+import { connectedToDatabase } from "./src/db/connection.js";
+import serverless from "serverless-http";
 config();
+
 // 创建 app
 const app = express();
+
 // 跨域
 app.use(
   cors({ origin: "https://mock-ai-chat-bot.vercel.app", credentials: true }),
@@ -27,16 +26,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use("/api/v1", appRouter);
 
+// 连接数据库
+let isConnected = false;
+async function ensureDatabaseConnection() {
+  if (!isConnected) {
+    await connectedToDatabase();
+    isConnected = true;
+  }
+}
+
 // 导出处理函数
-export default async function (req, res) {
+export const handler = serverless(async (req, res) => {
   try {
-    // 可选：在处理请求前确保数据库已连接
-    if (mongoose.connection.readyState !== 1) {
-      await connectedToDatabase();
-    }
+    await ensureDatabaseConnection();
     app(req, res);
   } catch (error) {
     console.error("Error handling request:", error);
     res.status(500).send({ error: "Internal server error" });
   }
-}
+});

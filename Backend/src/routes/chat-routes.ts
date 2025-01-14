@@ -6,12 +6,11 @@ import {
   generateChatCompletion,
   sendChatsToUser,
 } from "../controllers/chat-controller.js";
+import serverless from "serverless-http";
 
-// protected API ,only user can be visited!
 const chatRoutes = Router();
 
-// GPTchats 先验证token身份
-// (一系列的中间件处理逻辑)
+// 定义路由和中间件
 chatRoutes.post(
   "/new",
   validate(chatCompletionValidator),
@@ -19,10 +18,16 @@ chatRoutes.post(
   generateChatCompletion,
 );
 
-// 初始化聊天信息
 chatRoutes.get("/all-chats", verifyToken, sendChatsToUser);
 
-// 删除聊天信息
 chatRoutes.delete("/delete", verifyToken, deleteChats);
 
-export default chatRoutes;
+// 导出 serverless 处理函数
+export const handler = serverless((req, res, next) => {
+  try {
+    chatRoutes(req, res, next);
+  } catch (error) {
+    console.error("Error occurred in chatRoutes:", error);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+});

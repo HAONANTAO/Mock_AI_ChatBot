@@ -1,29 +1,8 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.ts",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "Frontend/dist/**",
-      "use": "@vercel/static-build"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/Frontend/dist/$1"
-    }
-  ],
   "functions": {
-    "api/**/*.ts": {
-      "memory": 512,
-      "maxDuration": 10
+    "routes/user-routes.js": {
+      "runtime": "nodejs20.x"
     }
-  }
+  },
+  "routes": [{ "src": "/api/v1/(.*)", "dest": "/routes/user-routes.js" }]
 }
