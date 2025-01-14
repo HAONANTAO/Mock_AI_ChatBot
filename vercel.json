@@ -1,6 +1,10 @@
 {
+  "functions": {
+    "Backend/index.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "build": {
-    "src": "Backend/index.ts",
     "use": "@vercel/node",
     "env": {
       "NODE_ENV": "production"
