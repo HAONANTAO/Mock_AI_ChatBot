@@ -32,4 +32,3 @@ else
     exit 1
 fi
 echo "deploying to vercel"
-vercel --prod
