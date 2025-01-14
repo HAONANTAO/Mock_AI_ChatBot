@@ -5,9 +5,10 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -e ts,json -w src -x \"tsc && node dist/index.js\"",
-    "build": "tsc --noEmitOnError --pretty",
-    "start": "node dist/index.js"
+    "dev": "nodemon -e ts,json -w src -x \"tsc --noEmitOnError --pretty && node dist/index.js\"",
+    "build": "tsc --noEmitOnError --pretty --outDir dist",
+    "start": "node dist/index.js",
+    "vercel-dev": "vercel dev"
   },
   "keywords": [],
   "author": "",

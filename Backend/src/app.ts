@@ -1,10 +1,11 @@
 import express from "express";
-// 从 dotenv 库中引入的 config 函数，在执行时会自动查找项目根目录下名为.env 的文件
 import { config } from "dotenv";
 import morgan from "morgan";
 import appRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import mongoose from "mongoose";
+import { connectedToDatabase, disconnectToDatabase } from "./db/connection.js";
 config();
 // 创建 app
 const app = express();
@@ -24,6 +25,15 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use("/api/v1", appRouter);
 
 // 导出处理函数
-export default function (req, res) {
-  app(req, res);
+export default async function (req, res) {
+  try {
+    // 可选：在处理请求前确保数据库已连接
+    if (mongoose.connection.readyState !== 1) {
+      await connectedToDatabase();
+    }
+    app(req, res);
+  } catch (error) {
+    console.error("Error handling request:", error);
+    res.status(500).send({ error: "Internal server error" });
+  }
 }

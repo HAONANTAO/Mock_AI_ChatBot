@@ -1,38 +1,37 @@
-import express from "express";
 import mongoose from "mongoose";
-import app from "./app.js";
+import express from "express";
 import { connectedToDatabase, disconnectToDatabase } from "./db/connection.js";
+import appRouter from "./routes/index.js";
 
-// 定义端口
+const app = express();
+// 配置处理 JSON 数据的中间件
+app.use(express.json());
 const port = process.env.PORT || 3000;
 
-// 启动数据库连接与服务器
-connectedToDatabase()
-  .then(() => {
-    const server = app.listen(port, () => {
-      console.log("😀connection is good, server works!😀");
+async function main() {
+  try {
+    await connectedToDatabase();
+    console.log("Database connection established.");
+
+    app.use(appRouter);
+
+    app.get("/", (req, res) => {
+      res.send("Hello, world!");
     });
 
-    // 捕获中断信号，用于正常关闭程序
-    process.on("SIGINT", async () => {
-      console.log("Received SIGINT. Closing server...");
-      try {
-        await server.close();
-        console.log("Server closed.");
-        await disconnectToDatabase();
-        console.log("Disconnected from database.");
-        process.exit(0);
-      } catch (error) {
-        console.error(
-          "Error closing server or disconnecting from database:",
-          error,
-        );
-        process.exit(1);
-      }
-    });
+    // 这里不能使用 app.listen 在 Serverless 环境，需移除
+    // const server = app.listen(port, () => {
+    //     console.log(`Server is running on port ${port}`);
+    // });
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    // 考虑在连接失败时关闭程序或进行其他错误处理
+    process.exit(1);
+  }
+}
 
-    return server;
-  })
-  .catch((error) => {
-    console.error("connected failed, server is not open:", error);
-  });
+main().catch((error) => {
+  console.error("Error in main function:", error);
+  // 处理 main 函数中未捕获的错误
+  process.exit(1);
+});
