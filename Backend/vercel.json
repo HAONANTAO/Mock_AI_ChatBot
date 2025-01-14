@@ -1,0 +1,14 @@
+{
+  "functions": {
+    "routes/user-routes.js": {
+      "runtime": "nodejs14.x"
+    },
+    "routes/chat-routes.js": {
+      "runtime": "nodejs14.x"
+    }
+  },
+  "routes": [
+    { "src": "/api/v1/user/(.*)", "dest": "/routes/user-routes.js" },
+    { "src": "/api/v1/chat/(.*)", "dest": "/routes/chat-routes.js" }
+  ]
+}
