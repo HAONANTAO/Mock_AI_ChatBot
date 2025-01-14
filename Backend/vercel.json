@@ -8,7 +8,7 @@
     }
   },
   "routes": [
-    { "src": "/api/v1/user/(.*)", "dest": "/dist/routes/user-routes.js" },
-    { "src": "/api/v1/chat/(.*)", "dest": "/dist/routes/chat-routes.js" }
+    { "src": "/api/v1/user/(.*)", "dest": "/dist/src/routes/user-routes.js" },
+    { "src": "/api/v1/chat/(.*)", "dest": "/dist/src/routes/chat-routes.js" }
   ]
 }
