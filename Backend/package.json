@@ -5,11 +5,11 @@
   "main": "index.ts",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -e ts,json -w src -x \"tsc --noEmitOnError --pretty && node dist/index.js\"",
-    "build": "tsc --noEmitOnError --pretty --outDir dist",
-    "vercel-build": "tsc --noEmitOnError --pretty --outDir dist",
-    "vercel-dev": "vercel dev"
-  },
+  "dev": "nodemon -e ts,json -w src -x \"tsc --noEmitOnError --pretty && node dist/index.js\"",
+  "build": "tsc --noEmitOnError --pretty --outDir dist",
+  "vercel-build": "tsc --noEmitOnError --pretty --outDir dist",
+  "vercel-dev": "vercel dev"  
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

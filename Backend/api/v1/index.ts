@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 import express from "express";
-import { connectedToDatabase, disconnectToDatabase } from "./db/connection.js";
-import appRouter from "./routes/index.js";
+import {
+  connectedToDatabase,
+  disconnectToDatabase,
+} from "../../src/db/connection.js";
+import appRouter from "../../src/routes/index.js";
 
 const app = express();
 // 配置处理 JSON 数据的中间ware
