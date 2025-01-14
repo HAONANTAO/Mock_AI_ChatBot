@@ -8,6 +8,7 @@ const app = express();
 app.use(express.json());
 // 在服务器初始化时注册路由
 app.use(appRouter);
+console.log("Routes mounted successfully");
 
 // 数据库连接和服务器启动
 async function initializeServer() {
