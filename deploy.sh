@@ -5,8 +5,7 @@ if [ -d "Backend" ]; then
     cd Backend
     npm install
     npm install typescript @types/node --save-dev
-    npm run build
-    npm start
+    npm run vercel-build
     echo "before cd.. in backend part :$(pwd)"
     cd ..
     echo "after cd.. in backend part :$(pwd)"
