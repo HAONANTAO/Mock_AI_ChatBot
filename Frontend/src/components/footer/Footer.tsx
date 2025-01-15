@@ -1,4 +1,4 @@
-
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -21,7 +21,7 @@ const Footer = () => {
               Aaron TAO
             </Link>
           </span>
-          <img src="Robot3.png" />
+          💘
         </p>
       </div>
     </footer>

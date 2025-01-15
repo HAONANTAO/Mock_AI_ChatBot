@@ -9,5 +9,5 @@
     "noEmitOnError": true,
     "pretty": true
   },
-  "include": ["src/**/*.ts", "index.ts", "app.ts"]
+  "include": ["src/**/*.ts", "src/index.ts"]
 }

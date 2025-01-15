@@ -4,7 +4,7 @@ import { BiLogInCircle } from "react-icons/bi";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import CustomizedInput from "../components/shared/CustomizedInput.tsx";
+import CustomizedInput from "../components/shared/CustomizedInput";
 
 const Login = () => {
   const navigator = useNavigate();

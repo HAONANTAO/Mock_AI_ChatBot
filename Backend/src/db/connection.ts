@@ -1,18 +1,18 @@
-import mongoose from "mongoose";
-let db;
-
-export async function connectedToDatabase() {
-  if (!db) {
-    const connectionString = process.env.MONGODB_URL;
-    if (!connectionString) {
-      throw new Error("MONGODB_URL is not defined in environment variables");
-    }
-    try {
-      db = await mongoose.connect(connectionString);
-    } catch (error) {
-      console.log(`Error connecting to database: ${error.message}`);
-      throw new Error(`connect to database failed: ${error.message}`);
-    }
+import { connect, disconnect } from "mongoose";
+async function connectedToDatabase() {
+  try {
+    await connect(process.env.MONGODB_URL);
+  } catch (error) {
+    console.log(error);
+    throw new Error("connect to database failed!");
   }
-  return db;
 }
+async function disconnectToDatabase() {
+  try {
+    await disconnect();
+  } catch (error) {
+    console.log(error);
+    throw new Error("disconnect to database failed!");
+  }
+}
+export { connectedToDatabase, disconnectToDatabase };
