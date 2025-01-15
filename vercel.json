@@ -10,7 +10,7 @@
     }
   ],
   "functions": {
-    "api/src/**/*.js": {
+    "src/routes/*.js": {
       "runtime": "@vercel/node@14.18.1"
     }
   }
