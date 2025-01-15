@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
+import { COOKIE_NAME } from "./constants.js";
 
 export const createToken = (id: string, email: string, expiresIn: string) => {
   const payload = { id, email };
@@ -40,7 +41,3 @@ export const verifyToken = async (
     });
   });
 };
-
-// constant
-export const COOKIE_NAME = "auth_token";
-export const USERNOT = "User not registered OR Token malfunctioned";

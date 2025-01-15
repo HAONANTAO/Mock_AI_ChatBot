@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "ES2022",
     "moduleResolution": "Node",
-    "target": "ES2020",
+    "target": "ES2022",
     "sourceMap": true,
-    "outDir": "api/dist",
+    "outDir": "dist",
     "allowSyntheticDefaultImports": true,
     "noEmitOnError": true,
     "pretty": true
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/index.ts"]
 }

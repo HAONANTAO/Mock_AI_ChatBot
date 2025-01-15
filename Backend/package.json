@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.ts",
   "type": "module",
-"scripts": {
-    "dev": "nodemon -e ts,json -w src -x \"tsc --noEmitOnError --pretty && node api/dist/index.js\"",
-    "build": "tsc --noEmitOnError --pretty --outDir api/dist",
-    "vercel-build": "tsc --noEmitOnError --pretty --outDir api/dist",
+  "scripts": {
+    "dev": "nodemon -e ts,json -w src -x \"tsc --noEmitOnError --pretty && node dist/index.js\"",
+    "build": "tsc --noEmitOnError --pretty --outDir dist",
+    "vercel-build": "tsc --noEmitOnError --pretty --outDir dist",
     "vercel-dev": "vercel dev"
   },
   "keywords": [],
@@ -34,7 +34,6 @@
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/jsonwebtoken": "^9.0.1",
-    "@types/morgan": "^1.9.9",
     "@types/node": "^20.4.8",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
