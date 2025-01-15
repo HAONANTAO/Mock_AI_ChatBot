@@ -2,7 +2,7 @@
 
 # Process the backend
 if [ -d "api" ]; then
-    cd Bacapikend
+    cd api
     npm install
     echo "api finish"
     echo "before cd.. in api part :$(pwd)"
