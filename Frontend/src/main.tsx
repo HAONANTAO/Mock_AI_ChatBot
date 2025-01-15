@@ -9,10 +9,8 @@ import axios from "axios";
 import { Toaster } from "react-hot-toast";
 
 // 基础url前缀
-axios.defaults.baseURL = "https://mock-ai-chat-bot.vercel.app/api/v1";
-// 跨域携带凭证
 axios.defaults.withCredentials = true;
-
+axios.defaults.baseURL = "https://mock-ai-chat-bot.vercel.app/api/v1";
 const theme = createTheme({
   // text文本显示
   typography: {

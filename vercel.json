@@ -1,6 +1,8 @@
 {
-  "rewrites": [
-    { "source": "/api/v1/user/(.*)", "destination": "/api/v1/user/$1" },
-    { "source": "/api/v1/chats/(.*)", "destination": "/api/v1/chats/$1" }
-  ]
+  "functions": {
+    "api/v1/*.js": {
+      "runtime": "nodejs14.x"
+    }
+  },
+  "rewrites": [{ "source": "/api/v1/(.*)", "destination": "/api/v1/$1" }]
 }
