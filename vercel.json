@@ -8,10 +8,5 @@
       "source": "/api/v1/chat/(.*)",
       "destination": "/api/v1/chat/$1"
     }
-  ],
-  "functions": {
-    "api/dist/routes/*.js": {
-      "runtime": "@vercel.node@5.0.2"
-    }
-  }
+  ]
 }
