@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # Process the backend
-if [ -d "Backend" ]; then
-    cd Backend
+if [ -d "api" ]; then
+    cd Bacapikend
     npm install
-    echo "backend finish"
-    echo "before cd.. in backend part :$(pwd)"
+    echo "api finish"
+    echo "before cd.. in api part :$(pwd)"
     cd ..
-    echo "after cd.. in backend part :$(pwd)"
+    echo "after cd.. in api part :$(pwd)"
 else 
-    echo "The backend folder not here"
+    echo "The api folder not here"
     exit 1
 fi
 
