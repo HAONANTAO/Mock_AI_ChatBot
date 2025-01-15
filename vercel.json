@@ -11,7 +11,7 @@
   ],
   "functions": {
     "api/dist/routes/*.js": {
-      "runtime": "@vercel/node@5.0.2"
+      "runtime": "@vercel.node@5.0.2"
     }
   }
 }
