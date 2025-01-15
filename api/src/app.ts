@@ -4,6 +4,7 @@ import morgan from "morgan";
 import appRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { Request, Response } from "express";
 
 config();
 const app = express();
@@ -26,11 +27,13 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use("/api/v1", appRouter);
 
 // 导出一个处理请求的异步函数
-export default async (req, res) => {
+export default async (req: Request, res: Response) => {
   try {
     await app(req, res);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send({ error: "Internal Server Error" });
+  } catch (error: any) {
+    console.error("Error occurred during request processing:", error);
+    res
+      .status(500)
+      .send({ error: "Internal Server Error", errorMessage: error.message });
   }
 };

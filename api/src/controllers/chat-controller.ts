@@ -3,10 +3,12 @@ import { USERNOT } from "../utils/token-manager.js";
 import { configOpenAI } from "../config/openai-config.js";
 import { OpenAIApi, ChatCompletionRequestMessage } from "openai";
 import { Request, Response } from "express";
+import { connectToDatabase } from "../db/connection";
 
 // generateChatCompletion
 export const generateChatCompletion = async (req: Request, res: Response) => {
   try {
+    const db = await connectToDatabase();
     // 从数据主体拿到用户输入的信息（问题）
     const { message } = req.body;
     console.log(message);
@@ -17,10 +19,12 @@ export const generateChatCompletion = async (req: Request, res: Response) => {
       return res.status(401).json({ message: `${USERNOT}` });
     }
 
-    const chats = user.chats.map(({ role, content }) => ({
-      role,
-      content,
-    })) as ChatCompletionRequestMessage[];
+    const chats = user.chats.map(
+      ({ role, content }: { role: string; content: string }) => ({
+        role,
+        content,
+      }),
+    ) as ChatCompletionRequestMessage[];
     chats.push({ content: message, role: "user" });
     user.chats.push({ content: message, role: "user" });
 
@@ -38,54 +42,64 @@ export const generateChatCompletion = async (req: Request, res: Response) => {
     await user.save();
 
     return res.status(200).json({ chats: user.chats });
-  } catch (error) {
-    console.log(error);
-    return res
-      .status(500)
-      .json({ message: "Something wrong while the GPT chat api" });
+  } catch (error: any) {
+    console.error("Error in generateChatCompletion:", error);
+    return res.status(500).json({
+      message: "Failed to generate chat completion",
+      error: error.message,
+    });
   }
 };
 
 // sendChatsToUser
 export const sendChatsToUser = async (req: Request, res: Response) => {
   try {
+    const db = await connectToDatabase();
     // user token check
     const user = await User.findById(req.cookies.jwtData?.id);
     if (!user) {
-      return res.status(401).send(`no any chat information here!`);
+      return res.status(401).json({ message: "Unauthorized: No user found" });
     }
 
     if (user._id.toString() !== req.cookies.jwtData?.id) {
-      return res.status(401).send("Permissions didn't match");
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: Permissions didn't match" });
     }
 
     return res.status(200).json({ message: "OK", chats: user.chats });
-  } catch (error) {
-    console.log(error);
-    return res.status(200).json({ message: "ERROR", cause: error.message });
+  } catch (error: any) {
+    console.error("Error in sendChatsToUser:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to send chats to user", error: error.message });
   }
 };
 
 // deleteChats
 export const deleteChats = async (req: Request, res: Response) => {
   try {
+    const db = await connectToDatabase();
     // user token check
     const user = await User.findById(req.cookies.jwtData?.id);
     if (!user) {
-      return res.status(401).send(`no any chat information here!`);
+      return res.status(401).json({ message: "Unauthorized: No user found" });
     }
 
     if (user._id.toString() !== req.cookies.jwtData?.id) {
-      return res.status(401).send("Permissions didn't match");
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: Permissions didn't match" });
     }
-
     // @ts-ignore
     user.chats = [];
     await user.save();
 
-    return res.status(200).json({ message: "OK" });
-  } catch (error) {
-    console.log(error);
-    return res.status(200).json({ message: "ERROR", cause: error.message });
+    return res.status(200).json({ message: "Chats deleted successfully" });
+  } catch (error: any) {
+    console.error("Error in deleteChats:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to delete chats", error: error.message });
   }
 };

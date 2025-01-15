@@ -6,8 +6,9 @@ import {
   sendChatsToUser,
 } from "../controllers/chat-controller.js";
 import { json } from "express";
+import { Request, Response } from "express";
 
-export default async (req, res) => {
+export default async (req: Request, res: Response) => {
   try {
     const { method, path } = req;
     // 解析 application/json 格式的数据
@@ -17,9 +18,16 @@ export default async (req, res) => {
       case "/new":
         if (method === "POST") {
           await validate(chatCompletionValidator)(req, res, async () => {
-            await verifyToken(req, res, async () => {
-              await generateChatCompletion(req, res);
-            });
+            try {
+              await verifyToken(req, res, async () => {
+                await generateChatCompletion(req, res);
+              });
+            } catch (verifyError: any) {
+              console.error("Token verification failed:", verifyError);
+              res
+                .status(401)
+                .send({ message: "Unauthorized", error: verifyError.message });
+            }
           });
         } else {
           res.status(405).send({ message: "Method Not Allowed" });
@@ -27,18 +35,32 @@ export default async (req, res) => {
         break;
       case "/all-chats":
         if (method === "GET") {
-          await verifyToken(req, res, async () => {
-            await sendChatsToUser(req, res);
-          });
+          try {
+            await verifyToken(req, res, async () => {
+              await sendChatsToUser(req, res);
+            });
+          } catch (verifyError: any) {
+            console.error("Token verification failed:", verifyError);
+            res
+              .status(401)
+              .send({ message: "Unauthorized", error: verifyError.message });
+          }
         } else {
           res.status(405).send({ message: "Method Not Allowed" });
         }
         break;
       case "/delete":
         if (method === "DELETE") {
-          await verifyToken(req, res, async () => {
-            await deleteChats(req, res);
-          });
+          try {
+            await verifyToken(req, res, async () => {
+              await deleteChats(req, res);
+            });
+          } catch (verifyError: any) {
+            console.error("Token verification failed:", verifyError);
+            res
+              .status(401)
+              .send({ message: "Unauthorized", error: verifyError.message });
+          }
         } else {
           res.status(405).send({ message: "Method Not Allowed" });
         }
@@ -46,8 +68,10 @@ export default async (req, res) => {
       default:
         res.status(404).send({ message: "Not Found" });
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send({ message: "Internal Server Error" });
+  } catch (error: any) {
+    console.error("Internal Server Error:", error);
+    res
+      .status(500)
+      .send({ message: "Internal Server Error", error: error.message });
   }
 };
