@@ -2,7 +2,7 @@ import User from "../models/User.js";
 import { NextFunction, Request, Response } from "express";
 import { hash, compare } from "bcrypt";
 import { createToken } from "../utils/token-manager.js";
-import { COOKIE_NAME, USERNOT } from "../utils/constants.js";
+import { COOKIE_NAME, USERNOT } from "../utils/token-manager.js";
 
 // 通用错误处理函数
 // const handleError = (res: Response, error: any) => {

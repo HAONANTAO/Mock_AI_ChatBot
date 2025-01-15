@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/User.js";
-import { USERNOT } from "../utils/constants.js";
+import { USERNOT } from "../utils/token-manager.js";
 import { configOpenAI } from "../config/openai-config.js";
 import { OpenAIApi, ChatCompletionRequestMessage } from "openai";
 
