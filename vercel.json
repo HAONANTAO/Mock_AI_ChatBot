@@ -7,14 +7,13 @@
     {
       "source": "/api/v1/chat/(.*)",
       "destination": "/api/v1/chat/$1"
-    },
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
     }
   ],
   "functions": {
-    "api/dist/routes/*.js": {
+    "api/dist/routes/chat-routes.js": {
+      "runtime": "@vercel/node@5.0.2"
+    },
+    "api/dist/routes/user-routes.js": {
       "runtime": "@vercel/node@5.0.2"
     }
   }
