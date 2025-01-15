@@ -10,10 +10,7 @@
     }
   ],
   "functions": {
-    "api/src/routes/chat-routes.js": {
-      "runtime": "@vercel/node@5.0.2"
-    },
-    "api/src/routes/user-routes.js": {
+    "dist/routes/*.js": {
       "runtime": "@vercel/node@5.0.2"
     }
   }
