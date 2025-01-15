@@ -10,7 +10,7 @@
     }
   ],
   "functions": {
-    "api/src/routes/*.ts": {
+    "api/dist/routes/*.js": {
       "runtime": "@vercel/node@5.0.2"
     }
   }
