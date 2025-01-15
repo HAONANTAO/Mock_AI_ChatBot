@@ -4,7 +4,7 @@
     "moduleResolution": "Node",
     "target": "ES2020",
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "api/dist",
     "allowSyntheticDefaultImports": true,
     "noEmitOnError": true,
     "pretty": true
