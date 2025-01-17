@@ -117,9 +117,9 @@ const Chat = () => {
                 fontWeight: 700,
               }}>
               {/* first Name */}
-              {auth?.user?.name[0]}
-              {/* if there are no last name  */}
-              {auth?.user?.name?.split(" ")?.[1]?.[0] ?? ""}
+              {auth?.user?.name?.split(" ")[0]?.[0]} {/* 显示名字的首字母 */}
+              {auth?.user?.name?.split(" ")[1]?.[0] ?? ""}{" "}
+              {/* 显示姓氏的首字母，如果没有姓氏则为空 */}
             </Avatar>
 
             {/* text */}
