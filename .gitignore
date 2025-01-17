@@ -4,15 +4,13 @@
 .tmp
 .idea
 .vscode
-
+.vercel
 
 Frontend/node_modules
-Frontend/dist 
+
 
 Backend/node_modules
 Backend/.env
-Backend/dist
 
-api/node_modules
-api/.env
-api/dist
+
+

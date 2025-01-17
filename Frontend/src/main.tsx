@@ -9,7 +9,8 @@ import axios from "axios";
 import { Toaster } from "react-hot-toast";
 
 // 基础url前缀
-axios.defaults.baseURL = "http://localhost:3000/api/v1";
+// 使用环境变量动态设置 baseURL
+axios.defaults.baseURL = "/api/v1"; // 使用相对路径
 // 跨域携带凭证
 axios.defaults.withCredentials = true;
 

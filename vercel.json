@@ -2,25 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/api/**/*.ts",
-      "use": "@vercel/node",
-      "config": {
-        "distDir": "dist"
-      }
+      "src": "Backend/src/index.ts",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "Frontend/package.json",
+      "use": "@vercel/static-build"
     }
   ],
   "routes": [
-    { "src": "/api/v1/(.*)", "dest": "/api/v1/$1" },
-    { "src": "/(.*)", "dest": "/" }
-  ],
-  "rewrites": [
     {
-      "source": "/api/v1/user/:path*",
-      "destination": "/api/user/:path*"
+      "src": "/api/v1/(.*)",
+      "dest": "/Backend/src/routes/index.ts"
     },
     {
-      "source": "/api/v1/chat/:path*",
-      "destination": "/api/chat/:path*"
+      "src": "/(.*)",
+      "dest": "/Frontend/$1"
     }
   ]
 }
