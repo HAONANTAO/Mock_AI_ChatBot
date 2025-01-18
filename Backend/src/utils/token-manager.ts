@@ -19,7 +19,7 @@ export const verifyToken = async (
 ) => {
   const token = req.signedCookies[`${COOKIE_NAME}`];
   // console.log(token);
-  console.log("Token from cookies:", token); // 观察这里的输出
+
   // 验证 JSON Web Token（JWT）有效性的中间件逻辑
   // 没有token;
   if (!token || token.trim() === "") {

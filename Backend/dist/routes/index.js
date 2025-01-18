@@ -6,5 +6,10 @@ const appRouter = Router();
 // 分路由集合routes
 appRouter.use("/user", userRoutes); //api/v1/user
 appRouter.use("/chat", chatRoutes); //api/v1/chat
+// vercel api test
+appRouter.use("/test", (req, res) => {
+    console.log("test good!");
+    res.send("test good2!");
+}); //api/v1/chat
 export default appRouter;
 //# sourceMappingURL=index.js.map

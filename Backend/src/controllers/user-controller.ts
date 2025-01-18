@@ -53,7 +53,7 @@ export const userSignup = async (
     // 首先清除之前的
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
-      domain: "localhost", // 改成和前端请求的域名一致，去除端口号
+      // domain: "localhost", // 改成和前端请求的域名一致，去除端口号
       path: "/",
 
       signed: true,
@@ -68,7 +68,7 @@ export const userSignup = async (
     // update later!!
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "localhost", // 改成和前端请求的域名一致，去除端口号
+      // 改成和前端请求的域名一致，去除端口号
       expires,
 
       httpOnly: true,
@@ -108,7 +108,7 @@ export const userLogin = async (
     // 首先清除之前的
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
-      domain: "localhost", // 改成和前端请求的域名一致，去除端口号
+      // 改成和前端请求的域名一致，去除端口号
       path: "/",
 
       signed: true,
@@ -128,7 +128,7 @@ export const userLogin = async (
     // update later!!
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "localhost", // 改成和前端请求的域名一致，去除端口号
+      // 改成和前端请求的域名一致，去除端口号
       expires,
 
       httpOnly: true,
@@ -197,7 +197,7 @@ export const logoutUser = async (
     // 首先清除之前的token cookies
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
-      domain: "localhost", //
+      //
       path: "/",
       signed: true,
     });
