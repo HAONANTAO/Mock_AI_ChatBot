@@ -8,6 +8,8 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -18,8 +20,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "types": ["jest", "@testing-library/jest-dom"] // 新增，确保 TypeScript 包含 Jest 和 @testing-library/jest-dom 的类型声明
   },
-  "include": ["src"],
+  "include": ["src", "tests/**/*.ts", "tests/**/*.tsx"], // 新增，确保测试文件也被包含在编译范围内
   "references": [{ "path": "./tsconfig.node.json" }]
 }
