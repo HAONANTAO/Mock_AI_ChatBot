@@ -204,7 +204,7 @@ The frontend architecture is centered around React, enabling a component - based
   - **TypeScript**: Also applied in the front-end, it strengthens the quality of JavaScript code. When writing component logic and handling event callbacks, it uses type checking to avoid potential errors.
   - **eslint**: A JavaScript code linting tool. With relevant plugins and configurations, it automatically detects syntax errors and style issues in the code, ensuring that the front-end code adheres to a unified coding standard.
 
-
+​			**jest**: A powerful testing framework for JavaScript. In the backend, it can be used to write 			unit tests, integration tests, and end-to-end tests. Jest simplifies the testing process with 			features like built-in mocking, snapshot testing, and easy-to-use assertions. It helps 			ensure the reliability and correctness of backend code by testing functions, middleware, 			and API endpoints. You can write tests for business logic, database operations, and API 			responses, and run them using Jest's command-line tool, catching bugs early in the 			development cycle.
 
 # **API_Documentation**：
 
@@ -443,5 +443,4 @@ It is mandatory that the above-mentioned copyright notice and this permission no
 The Software is offered on an "as is" basis. There are no warranties of any kind, whether expressed or implied. This encompasses, but is not restricted to, warranties regarding merchantability, suitability for a specific purpose, and non-infringement. Under no circumstances shall the authors or copyright holders be held accountable for any claims, damages, or other liabilities. These could arise from actions related to contracts, torts, or other legal causes, and be directly or indirectly connected to the Software, or any activities performed using it.
 
 By opting for the MIT license, our intention is to foster an open, collaborative development ecosystem. Developers are at liberty to fork the project, enhance it, and integrate it into their own undertakings, provided that they preserve the relevant copyright notices. This license is favored for its straightforwardness and permissive nature, which spurs a diverse array of contributions from the open-source community. Whether you're an independent coder eager to experiment with the code, or a large enterprise looking to build upon our groundwork, the MIT license endows you with the necessary freedom.
-
 
