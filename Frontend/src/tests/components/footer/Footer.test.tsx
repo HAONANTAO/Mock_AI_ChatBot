@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+// 测试中模拟路由行为
 import { MemoryRouter } from "react-router-dom";
 import Footer from "../../../components/footer/Footer";
 

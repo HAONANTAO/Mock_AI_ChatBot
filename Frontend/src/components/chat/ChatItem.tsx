@@ -1,8 +1,7 @@
-import React from "react";
 import { Box, Avatar, Typography } from "@mui/material";
 import { useAuth } from "../../context/AuthContext";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coldarkDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 function extractCodeFromString(message: string) {
   if (message.includes("```")) {
@@ -27,6 +26,22 @@ function isCodeBlock(str: string): [boolean, string] {
   }
   return [false, "text"];
 }
+// 渲染消息块
+function renderMessageBlocks(blocks: string[]) {
+  return blocks.map((block, index) => {
+    const [isCode, lang] = isCodeBlock(block);
+    return isCode ? (
+      <SyntaxHighlighter style={coldarkDark} language={lang} key={index}>
+        {block}
+      </SyntaxHighlighter>
+    ) : (
+      <Typography key={index} sx={{ fontSize: "20px" }}>
+        {block}
+      </Typography>
+    );
+  });
+}
+
 const ChatItem = ({
   content,
   role,
@@ -36,83 +51,37 @@ const ChatItem = ({
 }) => {
   const messageBlocks = extractCodeFromString(content);
   const auth = useAuth();
-  return role == "assistant" ? (
+
+  return (
     <Box
       sx={{
         display: "flex",
         p: 2,
-        bgcolor: "#004d5612",
+        bgcolor: role === "assistant" ? "#004d5612" : "#004d56",
         gap: 2,
         borderRadius: 2,
         my: 1,
       }}>
-      <Avatar sx={{ ml: "0" }}>
-        <img src="openai.png" alt="openai" width={"30px"} />
+      <Avatar
+        sx={{
+          ml: "0",
+          bgcolor: role === "assistant" ? "transparent" : "black",
+          color: "white",
+        }}>
+        {role === "assistant" ? (
+          <img src="openai.png" alt="openai" width={"30px"} />
+        ) : (
+          `${auth?.user?.name[0]}${auth?.user?.name.split(" ")[1][0]}`
+        )}
       </Avatar>
       <Box>
-        {!messageBlocks && (
+        {messageBlocks ? (
+          renderMessageBlocks(messageBlocks)
+        ) : (
           <Typography sx={{ fontSize: "20px" }}>{content}</Typography>
         )}
-        {/* 渲染 */}
-        {messageBlocks &&
-          messageBlocks.length > 0 &&
-          messageBlocks.map((block, index) => {
-            const [isCode, lang] = isCodeBlock(block);
-
-            return isCode ? (
-              <SyntaxHighlighter
-                style={coldarkDark}
-                language={lang}
-                key={index}>
-                {block}
-              </SyntaxHighlighter>
-            ) : (
-              <Typography key={index} sx={{ fontSize: "20px" }}>
-                {block}
-              </Typography>
-            );
-          })}
-      </Box>
-    </Box>
-  ) : (
-    <Box
-      sx={{
-        display: "flex",
-        p: 2,
-        bgcolor: "#004d56",
-        gap: 2,
-        borderRadius: 2,
-      }}>
-      <Avatar sx={{ ml: "0", bgcolor: "black", color: "white" }}>
-        {auth?.user?.name[0]}
-        {auth?.user?.name.split(" ")[1][0]}
-      </Avatar>
-      <Box>
-        {!messageBlocks && (
-          <Typography sx={{ fontSize: "20px" }}>{content}</Typography>
-        )}
-        {/* 渲染 */}
-        {messageBlocks &&
-          messageBlocks.length > 0 &&
-          messageBlocks.map((block, index) => {
-            const [isCode, lang] = isCodeBlock(block);
-
-            return isCode ? (
-              <SyntaxHighlighter
-                style={coldarkDark}
-                language={lang}
-                key={index}>
-                {block}
-              </SyntaxHighlighter>
-            ) : (
-              <Typography key={index} sx={{ fontSize: "20px" }}>
-                {block}
-              </Typography>
-            );
-          })}
       </Box>
     </Box>
   );
 };
-
 export default ChatItem;
