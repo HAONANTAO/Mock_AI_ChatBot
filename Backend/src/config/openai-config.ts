@@ -13,6 +13,6 @@ import { Configuration } from "openai";
 
 export const configOpenAI = () => {
   return new Configuration({
-    apiKey: process.env.OPEN_AI_SECRET,
+    apiKey: process.env.OPEN_AI_GPT_SECRET,
   });
 };

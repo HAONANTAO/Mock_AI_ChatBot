@@ -6,6 +6,7 @@ import appRouter from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 config();
+
 // 创建app
 const app = express();
 // 跨域
