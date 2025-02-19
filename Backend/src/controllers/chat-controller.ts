@@ -40,10 +40,21 @@ export const generateChatCompletion = async (
     await user.save();
     return res.status(200).json({ chats: user.chats });
   } catch (error) {
-    console.log(error);
-    return res
-      .status(500)
-      .json({ message: "Something wrong while the GPT chat api" });
+    if (error.response) {
+      console.error(
+        "OpenAI API Error:",
+        error.response.status,
+        error.response.data,
+      );
+    } else if (error.request) {
+      console.error("No response received:", error.request);
+    } else {
+      console.error("Axios request error:", error.message);
+    }
+    return res.status(500).json({
+      message: "GPT API error",
+      error: error.response?.data || error.message,
+    });
   }
 };
 
