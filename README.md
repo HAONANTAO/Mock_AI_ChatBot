@@ -64,7 +64,7 @@ The Mock ChatBot is an intelligent chatbot application leveraging OpenAI's API t
 - Open your terminal and navigate to the directory where you want to store the project. Then run the following Git command:
 
   ```
-  git clone https://github.com/HAONANTAO/GameHub.git
+  git clone https://github.com/HAONANTAO/Mock_AI_ChatBot.git
   cd Mock_AI_ChatBot
   ```
 
