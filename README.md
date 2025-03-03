@@ -422,13 +422,12 @@ All API endpoints are prefixed with `/api/v1`.
 
 # **Contact Information**：
 
-Aaron(HAONAN) TAO
 
-email:873190199@qq.com
+- **Name**: Aaron (HAONAN) TAO
+- **Email**: [873190199@qq.com](mailto:873190199@qq.com)
+- **GitHub**: [HAONANTAO](https://github.com/HAONANTAO)
+- **LinkedIn**: [Aaron Tao](https://www.linkedin.com/in/haonan-tao-aaron)
 
-github:https://github.com/HAONANTAO
-
-linkin:https://www.linkedin.com/in/haonan-tao-aaron
 
 # **License**：
 
