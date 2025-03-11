@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-01-20 15:07:56
  * @LastEditors: 陶浩南 14639548+haonantao-aaron@user.noreply.gitee.com
- * @LastEditTime: 2025-03-11 17:08:04
+ * @LastEditTime: 2025-03-11 17:09:39
  * @FilePath: /Mock_AI_ChatBot/Frontend/src/components/chat/ChatItem.tsx
  */
 import { Box, Avatar, Typography } from "@mui/material";
@@ -71,11 +71,18 @@ const ChatItem = ({
       <Avatar
         sx={{
           ml: "0",
-          bgcolor: role === "assistant" ? "transparent" : "white",
+          bgcolor: role === "assistant" ? "transparent" : "black",
           color: "white",
         }}>
         {role === "assistant" ? (
-          <img src="openai.png" alt="openai" width={"30px"} />
+          <img
+            src="openai.png"
+            alt="openai"
+            width={"30px"}
+            style={{
+              filter: "contrast(1.5) brightness(1.1)", // 提高对比度，稍微增加亮度
+            }}
+          />
         ) : auth?.user?.name ? (
           auth.user.name
             .split(" ")
