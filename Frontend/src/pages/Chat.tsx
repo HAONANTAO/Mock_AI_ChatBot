@@ -116,10 +116,8 @@ const Chat = () => {
                 color: "black",
                 fontWeight: 700,
               }}>
-              {/* first Name */}
-              {auth?.user?.name[0]}
-              {/* if there are no last name  */}
-              {auth?.user?.name?.split(" ")?.[1]?.[0] ?? ""}
+              {auth?.user?.name?.[0] || ""}
+              {auth?.user?.name?.split(" ")?.[1]?.[0] || ""}
             </Avatar>
 
             {/* text */}
