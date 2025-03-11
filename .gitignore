@@ -5,7 +5,7 @@
 .idea
 .vscode
 .vercel
-
+.history
 Frontend/node_modules
 
 
