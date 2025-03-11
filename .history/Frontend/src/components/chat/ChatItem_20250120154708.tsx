@@ -1,9 +1,3 @@
-/*
- * @Date: 2025-01-20 15:07:56
- * @LastEditors: 陶浩南 14639548+haonantao-aaron@user.noreply.gitee.com
- * @LastEditTime: 2025-03-11 17:05:37
- * @FilePath: /Mock_AI_ChatBot/Frontend/src/components/chat/ChatItem.tsx
- */
 import { Box, Avatar, Typography } from "@mui/material";
 import { useAuth } from "../../context/AuthContext";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -76,14 +70,8 @@ const ChatItem = ({
         }}>
         {role === "assistant" ? (
           <img src="openai.png" alt="openai" width={"30px"} />
-        ) : auth?.user?.name ? (
-          auth.user.name
-            .split(" ")
-            .map((word) => word[0]) // 取每个单词的首字母
-            .join("")
-            .toUpperCase() // 变大写
         ) : (
-          "?"
+          `${auth?.user?.name[0]}${auth?.user?.name.split(" ")[1][0]}`
         )}
       </Avatar>
       <Box>
