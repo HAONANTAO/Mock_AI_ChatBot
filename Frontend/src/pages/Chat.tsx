@@ -116,9 +116,12 @@ const Chat = () => {
                 color: "black",
                 fontWeight: 700,
               }}>
-              {typeof auth?.user?.name === "string" ? auth.user.name[0] : ""}
+              {typeof auth?.user?.name === "string" && auth.user.name.length > 0
+                ? auth.user.name[0]
+                : ""}
               {typeof auth?.user?.name === "string" &&
-              auth.user.name.includes(" ")
+              auth.user.name.includes(" ") &&
+              auth.user.name.split(" ")[1]
                 ? auth.user.name.split(" ")[1][0]
                 : ""}
             </Avatar>
